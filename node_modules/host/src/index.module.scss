@@ -1,0 +1,42 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  overflow-y: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+:root {
+  --navy-blue: #1d1932;
+  --light-blue: #231d3b;
+  --button-blue: #3b5683;
+  --transparent-blue: #312b46;
+
+  --rainbow-background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000,
+    #ff0000,
+    #ff7300,
+    #fffb00
+  );
+}
+
+

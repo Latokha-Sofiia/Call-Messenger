@@ -1,0 +1,64 @@
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  border-bottom: #3b5683 1px solid;
+  background: var(--light-blue);
+  border-radius: 8px;
+  height: 32px;
+  padding: 8px;
+}
+
+.wrapper {
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+
+.todoInput {
+  color: #9298a0;
+  user-select: none;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  padding: 5px;
+  width: 300px;
+  font-family: Roboto, serif;
+  font-size: 14px;
+}
+
+.addTodo {
+  width: 28px;
+  height: 28px;
+  font-size: 28px;
+  background-color: var(--button-blue);
+  color: white;
+  line-height: 28px;
+  text-align: center;
+  border-radius: 6px;
+  cursor: pointer;
+  user-select: none;
+  margin-left: 10px;
+
+  &:hover {
+    background: var(--rainbow-background);
+    background-size: 400%;
+    animation: glowing 20s linear infinite;
+    transition: opacity 0.3s ease-in-out;
+
+    color: var(--navy-blue);
+    font-weight: 700;
+
+    @keyframes glowing {
+      0% {
+        background-position: 0 0;
+      }
+      50% {
+        background-position: 400% 0;
+      }
+      100% {
+        background-position: 0 0;
+      }
+    }
+  }
+}
