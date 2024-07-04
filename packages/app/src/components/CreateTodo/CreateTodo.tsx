@@ -11,7 +11,7 @@ export default function CreateTodo() {
   const onClickAddTodo = async () => {
     if (inputValue.trim() !== "") {
       await todoController.addTodo(inputValue)
-      setInputValue("") // Сбросить значение input после добавления todo
+      setInputValue("")
     }
   }
 

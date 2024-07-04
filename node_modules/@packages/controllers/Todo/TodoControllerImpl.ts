@@ -21,12 +21,9 @@ export class TodoControllerImpl implements TodoController {
     }
   }
 
-
   async addTodo(title: string) {
     try {
       const response = await this.apiClient.post<Todo[]>("/todos", { title })
-      // Удалить log
-      console.log(response)
       const todos: Todo[] = response.data
       this.todosStore.setTodos(todos)
     } catch (error) {
@@ -38,10 +35,6 @@ export class TodoControllerImpl implements TodoController {
     try {
       await this.apiClient.delete(`/todos?id=${id}`)
       this.todosStore.removeTodo(id)
-
-      const response = await this.apiClient.get<Todo[]>("/todos")
-      // Удалить log
-      console.log(response)
     } catch (error) {
       console.error("Error removing todo:", error)
     }
