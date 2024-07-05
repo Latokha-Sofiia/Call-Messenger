@@ -65,4 +65,5 @@ describe("TodoStore", () => {
       expect(todosStore.todos).toEqual(TODOS)
     })
   })
+
 })
