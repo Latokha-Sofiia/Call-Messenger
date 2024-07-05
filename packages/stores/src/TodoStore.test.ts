@@ -1,42 +1,47 @@
 import { Todo, todosStore } from "./TodoStore"
 
-let todosMock: Todo[] = [
-  { id: "1", title: "Mock Todo 1", completed: true },
-  { id: "2", title: "Mock Todo 2", completed: false },
-]
+function createTodos(): Todo[] {
+  return [
+    { id: "1", title: "Todo 1", completed: true },
+    { id: "2", title: "Todo 2", completed: false },
+  ]
+}
+todosStore.todos = createTodos()
 
 describe("TodoStore", () => {
-  beforeEach(() => {
-    todosStore.setTodos([...todosMock])
+  afterAll(() => {
+    todosStore.todos = createTodos()
   })
 
   describe("setTodos method", () => {
     it("should set the todos ", () => {
-      const tempTodo: Todo = { id: "3", title: "added todo", completed: true }
-      const expectedTodoSet = [...todosMock, tempTodo]
-      todosStore.setTodos(expectedTodoSet)
-      expect(todosStore.todos).toEqual(expectedTodoSet)
+      todosStore.todos = []
+      const todos: Todo[] = createTodos()
+      todosStore.setTodos(todos)
+      expect(todosStore.todos).toEqual(todos)
     })
   })
 
   describe("removeTodo method", () => {
     it("should remove todo with the given id", () => {
-      let expectedTodoSet = [
-        { id: "2", title: "Mock Todo 2", completed: false },
-      ]
+      let expectedTodoSet: Todo[] = createTodos()
       todosStore.removeTodo("1")
-      expect(todosStore.todos).toEqual(expectedTodoSet)
+      expect(todosStore.todos).toEqual(
+        expectedTodoSet.filter((todo) => todo.id !== "1")
+      )
     })
 
     it("shouldn't remove todo if the given id doesn't exist", () => {
+      let expectedTodoSet: Todo[] = createTodos()
       todosStore.removeTodo("3")
-      expect(todosStore.todos).toEqual([...todosMock])
+      expect(todosStore.todos).toEqual(expectedTodoSet)
     })
   })
 
   describe("completeTodo method", () => {
     it("should toggle the completed status of the todo with the given id back to false", () => {
-      let tempTodosStatusFalse = todosMock.map((todo) => ({
+      let TODOS: Todo[] = createTodos()
+      let tempTodosStatusFalse = TODOS.map((todo) => ({
         ...todo,
         completed: false,
       }))
@@ -45,7 +50,8 @@ describe("TodoStore", () => {
     })
 
     it("should toggle the completed status of the todo with the given id back to true", () => {
-      let tempTodosStatusTrue = todosMock.map((todo) => ({
+      let TODOS: Todo[] = createTodos()
+      let tempTodosStatusTrue = TODOS.map((todo) => ({
         ...todo,
         completed: true,
       }))
@@ -54,8 +60,9 @@ describe("TodoStore", () => {
     })
 
     it("shouldn't toggle the completed status of the todo with not existent id", () => {
+      let TODOS: Todo[] = createTodos()
       todosStore.completeTodo("3")
-      expect(todosStore.todos).toEqual([...todosMock])
+      expect(todosStore.todos).toEqual(TODOS)
     })
   })
 })
