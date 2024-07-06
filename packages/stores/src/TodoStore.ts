@@ -13,7 +13,7 @@ export interface TodosStore {
   completeTodo(id: string): void
 }
 
-class TodosStoreImpl implements TodosStore {
+export class TodosStoreImpl implements TodosStore {
   todos: Todo[] = []
 
   constructor() {
