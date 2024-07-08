@@ -15,6 +15,7 @@ export class TodoControllerImpl implements TodoController {
   async fetchTodos() {
     try {
       const response = await this.apiClient.get<Todo[]>("/todos")
+      this.todosStore.cleanTodos()
       this.todosStore.addTodos(response.data)
     } catch (error) {
       console.error("Error fetching todos:", error)
