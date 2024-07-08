@@ -15,7 +15,7 @@ export class TodoControllerImpl implements TodoController {
   async fetchTodos() {
     try {
       const response = await this.apiClient.get<Todo[]>("/todos")
-      this.todosStore.setTodos(response.data)
+      this.todosStore.addTodos(response.data)
     } catch (error) {
       console.error("Error fetching todos:", error)
     }
@@ -24,8 +24,8 @@ export class TodoControllerImpl implements TodoController {
   async addTodo(title: string) {
     try {
       const response = await this.apiClient.post<Todo[]>("/todos", { title })
-      const todos: Todo[] = response.data
-      this.todosStore.setTodos(todos)
+      const newTodos: Todo[] = response.data
+      this.todosStore.addTodos(newTodos)
     } catch (error) {
       console.error("Error adding todo:", error)
     }
