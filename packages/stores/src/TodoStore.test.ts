@@ -14,15 +14,48 @@ describe("TodoStore", () => {
     todosStore = new TodosStoreImpl()
   })
 
-  it("setTodos method should set the todos", () => {
-    const todos = createTodos()
-    todosStore.setTodos(todos)
+  it("addTodo method should add new todos to the existing list", () => {
+    todosStore.addTodos(createTodos())
     expect(todosStore.todos).toEqual(createTodos())
   })
 
+  describe("updateTodos method", () => {
+    beforeEach(() => {
+      todosStore.addTodos(createTodos())
+    })
+
+    it("should update the existing todo", () => {
+      const updatedTodo: Todo = {
+        id: "1",
+        title: "updateTodo",
+        completed: false,
+      }
+      todosStore.updateTodo(updatedTodo)
+      expect(todosStore.todos).toEqual(
+        createTodos().map((todo) => (todo.id === "1" ? updatedTodo : todo))
+      )
+    })
+
+    it("shouldn't update any todo if the given id doesn't exist", () => {
+      const updatedTodo: Todo = {
+        id: "3",
+        title: "updateTodo",
+        completed: false,
+      }
+      todosStore.updateTodo(updatedTodo)
+      expect(todosStore.todos).toEqual(createTodos())
+    })
+  })
+
+  // it("setTodos method should set the todos", () => {
+  //   const todos = createTodos()
+  //   todosStore.setTodos(todos)
+  //   expect(todosStore.todos).toEqual(createTodos())
+  // })
+
   describe("removeTodo method", () => {
     beforeEach(() => {
-      todosStore.setTodos(createTodos())
+      todosStore.addTodos(createTodos())
     })
 
     it("should remove todo with the given id", () => {
@@ -40,7 +73,7 @@ describe("TodoStore", () => {
 
   describe("completeTodo method", () => {
     beforeEach(() => {
-      todosStore.setTodos(createTodos())
+      todosStore.addTodos(createTodos())
     })
 
     it("should toggle the completed status of the todo with the given id back to false", () => {
@@ -67,6 +100,17 @@ describe("TodoStore", () => {
       let todos = createTodos()
       todosStore.completeTodo("3")
       expect(todosStore.todos).toEqual(todos)
+    })
+  })
+
+  describe("cleanTodos method", () => {
+    beforeEach(() => {
+      todosStore.addTodos(createTodos())
+    })
+
+    it("should clear all todos", () => {
+      todosStore.cleanTodos()
+      expect(todosStore.todos).toEqual([])
     })
   })
 })

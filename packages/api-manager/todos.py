@@ -62,7 +62,7 @@ def create_todos():
     }
     todos.append(new_todo)
 
-    response = jsonify(todos)
+    response = jsonify([new_todo])
     return response
 
 @app.route('/todos', methods=['DELETE'])

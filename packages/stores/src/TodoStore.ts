@@ -8,9 +8,12 @@ export interface Todo {
 
 export interface TodosStore {
   todos: Todo[]
-  setTodos(todos: Todo[]): void
+  addTodos(todos: Todo[]): void
+  updateTodo(updatedTodo: Todo): void
+  // setTodos(todos: Todo[]): void
   removeTodo(id: string): void
   completeTodo(id: string): void
+  cleanTodos(): void
 }
 
 export class TodosStoreImpl implements TodosStore {
@@ -20,9 +23,19 @@ export class TodosStoreImpl implements TodosStore {
     makeAutoObservable(this)
   }
 
-  setTodos(todos: Todo[]) {
-    this.todos = todos
+  addTodos(todos: Todo[]) {
+    this.todos = [...this.todos, ...todos]
   }
+
+  updateTodo(updatedTodo: Todo) {
+    this.todos = this.todos.map((todo) =>
+      todo.id === updatedTodo.id ? updatedTodo : todo
+    )
+  }
+
+  // setTodos(todos: Todo[]) {
+  //   this.todos = todos
+  // }
 
   removeTodo(id: string) {
     this.todos = this.todos.filter((todo) => todo.id !== id)
@@ -32,6 +45,10 @@ export class TodosStoreImpl implements TodosStore {
     this.todos = this.todos.map((todo) =>
       todo.id === id ? { ...todo, completed: !todo.completed } : todo
     )
+  }
+
+  cleanTodos() {
+    this.todos = []
   }
 }
 

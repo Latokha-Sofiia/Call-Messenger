@@ -1,7 +1,8 @@
 import * as React from "react"
 import * as styles from "./App.module.scss"
 import { Outlet } from "react-router-dom"
-import Sidebar from "@/components/Sidebar/Sidebar"
+// import Sidebar from "@/components/Sidebar/Sidebar"
+import Sidebar from "../../components/Sidebar/Sidebar"
 
 export const App = () => {
   return (
