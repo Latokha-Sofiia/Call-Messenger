@@ -8,6 +8,7 @@
   opacity: 0;
   pointer-events: none;
   transition: 0.5s;
+  user-select: none;
 }
 
 .modal.active {
@@ -15,6 +16,7 @@
   height: 100vh;
   width: 100vw;
   pointer-events: all;
+  user-select: none;
 }
 
 .modal_content {
@@ -30,12 +32,14 @@
   margin: 15px;
   background-color: var(--gray-text);
   border: 2px solid transparent;
+  user-select: none;
 }
 
 .modal_content.active {
   transform: scale(1);
   border-width: 3px;
   border-color: white;
+  user-select: none;
 }
 
 .rainbowBorder {
@@ -46,6 +50,7 @@
   width: 35.5%;
   height: 18.5%;
   margin: 10px;
+  user-select: none;
 
   background: var(--rainbow-background);
   background-size: 400%;
@@ -59,6 +64,7 @@
   font-weight: 700;
   margin-bottom: 5px;
   text-align: center;
+  user-select: none;
 }
 
 .textContent {
@@ -69,6 +75,7 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  user-select: none;
 }
 
 .img {
@@ -77,6 +84,7 @@
   bottom: 5px;
   position: fixed;
   z-index: 2;
+  user-select: none;
 }
 
 @keyframes glowing {
