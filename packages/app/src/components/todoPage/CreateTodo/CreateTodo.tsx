@@ -1,18 +1,20 @@
 import React, { useState } from "react"
 import * as styles from "./CreateTodo.module.scss"
-import { todoController } from '@packages/controllers/Todo/TodoControllerImpl';
+import { todoController } from "@packages/controllers/Todo/TodoControllerImpl"
+import TodoModal, { CatType } from "../../notifications/TodoModal/TodoModal"
 
 export default function CreateTodo() {
   const [inputValue, setInputValue] = useState("")
+  const [modalActive, setModalActive] = useState(false)
+
   const onInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value)
   }
 
   const onClickAddTodo = async () => {
-    if (inputValue.trim() !== "") {
-      await todoController.addTodo(inputValue)
-      setInputValue("")
-    }
+    await todoController.addTodo(inputValue)
+    setModalActive(true)
+    // TODO добавить setInputValue("")
   }
 
   return (
@@ -28,6 +30,13 @@ export default function CreateTodo() {
       <div onClick={onClickAddTodo} className={styles.addTodo}>
         +
       </div>
+      <TodoModal
+        active={modalActive}
+        setActive={setModalActive}
+        childrenTitle={"Добавлено новое Todo:"}
+        childrenContent={inputValue}
+        catType={CatType.happy}
+      ></TodoModal>
     </div>
   )
 }
