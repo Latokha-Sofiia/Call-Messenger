@@ -1,24 +1,27 @@
 import { observer } from "mobx-react-lite"
 import { todosStore } from "@packages/stores/src/TodoStore"
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { todoController } from "@packages/controllers/Todo/TodoControllerImpl"
 import * as styles from "./TodoItem.module.scss"
+import TodoModal, { CatType } from "../../notifications/TodoModal/TodoModal"
 
 const Todo = observer(() => {
   useEffect(() => {
     todoController.fetchTodos()
   }, [])
 
+  const completedTodos = todosStore.todos.filter((todo) => todo.completed)
+  const notCompletedTodos = todosStore.todos.filter((todo) => !todo.completed)
+  const [modalActive, setModalActive] = useState(false)
+
   const handleRemoveTodo = async (id: string) => {
     await todoController.removeTodo(id)
+    setModalActive(true)
   }
 
   const handleCompleteTodo = async (id: string) => {
     await todoController.completeTodo(id)
   }
-
-  const completedTodos = todosStore.todos.filter((todo) => todo.completed)
-  const notCompletedTodos = todosStore.todos.filter((todo) => !todo.completed)
 
   return (
     <div className={styles.allTodos}>
@@ -69,6 +72,13 @@ const Todo = observer(() => {
           ))}
         </div>
       </div>
+      <TodoModal
+        active={modalActive}
+        setActive={setModalActive}
+        childrenContent={""}
+        childrenTitle={"Todo нас покинуло..."}
+        catType={CatType.sad}
+      />
     </div>
   )
 })
