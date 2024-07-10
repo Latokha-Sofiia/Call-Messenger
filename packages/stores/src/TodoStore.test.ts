@@ -36,14 +36,14 @@ describe("TodoStore", () => {
       )
     })
 
-    it("shouldn't update any todo if the given id doesn't exist", () => {
+    it("should add a new todo if the given id doesn't exist", () => {
       const updatedTodo: Todo = {
         id: "3",
         title: "updateTodo",
         completed: false,
       }
       todosStore.updateTodo(updatedTodo)
-      expect(todosStore.todos).toEqual(createTodos())
+      expect(todosStore.todos).toEqual([...createTodos(), updatedTodo])
     })
   })
 

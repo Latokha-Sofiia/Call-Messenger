@@ -24,10 +24,19 @@ export class TodosStoreImpl implements TodosStore {
   }
 
   addTodos(todos: Todo[]) {
-    this.todos = [...this.todos, ...todos]
+    const existingIds = this.todos.map((todo) => todo.id)
+    const newTodos = todos.filter((todo) => !existingIds.includes(todo.id))
+    this.todos = [...this.todos, ...newTodos]
   }
 
   updateTodo(updatedTodo: Todo) {
+    const todoIndex = this.todos.findIndex((todo) => todo.id === updatedTodo.id)
+    if (todoIndex !== -1) {
+      this.todos[todoIndex] = updatedTodo
+    } else {
+      this.todos = [...this.todos, updatedTodo]
+    }
+
     this.todos = this.todos.map((todo) =>
       todo.id === updatedTodo.id ? updatedTodo : todo
     )

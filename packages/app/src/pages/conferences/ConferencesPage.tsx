@@ -1,5 +1,5 @@
 import React from "react"
-import MessageBoard from "@/components/MessageBoard/MessageBoard"
+import MessageBoard from "../../components/shared/MessageBoard/MessageBoard"
 
 const ConferencesPage = () => {
   const tabs = ["Активные", "Запланированные", "Прошедшие"]

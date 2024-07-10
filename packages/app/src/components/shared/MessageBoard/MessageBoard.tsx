@@ -1,7 +1,7 @@
 import * as React from "react"
 import * as styles from "./MessageBoard.module.scss"
-import SearchBar from "@/components/SearchBar/SearchBar"
-import ListOfConferences from "@/components/ListOfConferences/ListOfConferences"
+import SearchBar from "../../../components/shared/SearchBar/SearchBar"
+import ListOfConferences from "../../../components/conferences/ListOfConferences/ListOfConferences"
 
 interface MessageBoardProps {
   buttonText: string

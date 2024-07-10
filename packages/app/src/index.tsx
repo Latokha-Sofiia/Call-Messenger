@@ -4,7 +4,7 @@ import { App } from "./components/App/App"
 import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom"
 import ConferencesPage from "./pages/conferences/ConferencesPage"
 import CallsPage from "./pages/calls/CallsPage"
-import TodosPage from "@/pages/TodosPage/TodosPage"
+import TodosPage from "../src/pages/TodosPage/TodosPage"
 import "./index.module.scss"
 
 const root = document.getElementById("root")
