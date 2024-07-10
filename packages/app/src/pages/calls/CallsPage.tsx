@@ -1,5 +1,5 @@
 import React from "react"
-import MessageBoard from "@/components/MessageBoard/MessageBoard"
+import MessageBoard from "../../components/shared/MessageBoard/MessageBoard"
 
 const CallsPage = () => {
   const tabs = ["Все звонки", "Пропущенные"]

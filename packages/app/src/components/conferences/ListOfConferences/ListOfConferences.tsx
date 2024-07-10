@@ -1,6 +1,6 @@
 import React from "react"
 import * as styles from "./ListOfConferences.module.scss"
-import ConfChatsOnLeftPanel from '@/components/ChatsOnLeftPanel/ConfChatsOnLeftPanel';
+import ConfChatsOnLeftPanel from '../../../components/shared/ChatsOnLeftPanel/ConfChatsOnLeftPanel';
 interface listOfConferencesProps {
     tabsItems: string[];
 }
