@@ -4,7 +4,7 @@ import {
   Todo,
   TodosStore,
   todosStore as defaultTodosStore,
-} from "@packages/stores/src/TodoStore"
+} from "@packages/stores/src/todoStore/TodoStore"
 
 export class TodoControllerImpl implements TodoController {
   private nextTag: string | undefined = undefined;
@@ -17,7 +17,7 @@ export class TodoControllerImpl implements TodoController {
   async fetchTodos(pageSize: number = 30) {
     try {
       const response = await this.apiClient.get<{ todos: Todo[], tag: string }>("/todos", {
-        params: { pageSize }
+        params: { }
       })
       this.todosStore.cleanTodos()
       this.todosStore.addTodos(response.data.todos)

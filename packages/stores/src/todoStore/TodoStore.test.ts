@@ -2,8 +2,8 @@ import { Todo, TodosStore, TodosStoreImpl } from "./TodoStore"
 
 function createTodos(): Todo[] {
   return [
-    { id: "1", title: "Todo 1", completed: true },
-    { id: "2", title: "Todo 2", completed: false },
+    { id: "1", title: "todoStore 1", completed: true },
+    { id: "2", title: "todoStore 2", completed: false },
   ]
 }
 
