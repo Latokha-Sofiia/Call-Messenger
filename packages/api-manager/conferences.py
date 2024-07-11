@@ -45,19 +45,33 @@ conferences = [
 ]
 
 @app.route('/conferences', methods=['GET'])
-@cross_origin()
 def get_conferences():
-    response = jsonify(conferences)
-    return response
+    page_size = int(request.args.get('pageSize', 10))
+    tag = request.args.get('tag')
+
+    start_index = 0
+    if tag:
+        start_index = next((i for i, conference in enumerate(conferences) if str(conference['id']) == tag), len(conferences))
+
+    paginated_conferences = conferences[start_index:start_index + page_size]
+    next_tag = None
+    if len(conferences) > start_index + page_size:
+        next_tag = str(conferences[start_index + page_size]['id'])
+
+    response = {
+        'conferences': paginated_conferences,
+        'tag': next_tag
+    }
+    return jsonify(response)
 
 @app.route('/conferences', methods=['POST'])
 @cross_origin()
 def create_conference():
     new_conference = {
-        'id': str(time.time()),
+        'id': str(int(time.time())),
         'title': request.json['title'],
-        'date': request.json['date'],
-        'status': request.json['status'],
+        'date': time.strftime("%d %B %Y %H:%M", time.localtime()),
+        'status': 'active',
         'organizer': request.json['organizer'],
         'responsible': request.json['responsible'],
         'participants': request.json['participants'],
@@ -67,7 +81,7 @@ def create_conference():
     }
     conferences.append(new_conference)
 
-    response = jsonify(conferences)
+    response = jsonify(new_conference)
     return response
 
 @app.route('/conferences', methods=['DELETE'])
@@ -77,6 +91,7 @@ def delete_conference():
     global conferences
     conferences = [conference for conference in conferences if str(conference['id']) != id]
     return jsonify(conferences)
+
 
 @app.route('/conferences', methods=['PATCH'])
 @cross_origin()
@@ -90,6 +105,7 @@ def update_conference():
             updated_conference = conference
             break
     return jsonify(updated_conference)
+
 
 if __name__ == '__main__':
     app.run()

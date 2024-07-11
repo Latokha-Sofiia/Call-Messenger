@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite"
-import { todosStore } from "@packages/stores/src/TodoStore"
+import { todosStore } from "@packages/stores/src/todoStore/TodoStore"
 import React, { useEffect, useState, useCallback } from "react"
 import { todoController } from "@packages/controllers/Todo/TodoControllerImpl"
 import * as styles from "./TodoItem.module.scss"
@@ -87,7 +87,7 @@ const Todo = observer(() => {
           active={modalActive}
           setActive={setModalActive}
           childrenContent={""}
-          childrenTitle={"Todo нас покинуло..."}
+          childrenTitle={"todoStore нас покинуло..."}
           catType={CatType.sad}
         />
       </div>

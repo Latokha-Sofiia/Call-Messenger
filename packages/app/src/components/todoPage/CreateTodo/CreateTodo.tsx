@@ -33,7 +33,7 @@ export default function CreateTodo() {
       <TodoModal
         active={modalActive}
         setActive={setModalActive}
-        childrenTitle={"Добавлено новое Todo:"}
+        childrenTitle={"Добавлено новое todoStore:"}
         childrenContent={inputValue}
         catType={CatType.happy}
       ></TodoModal>

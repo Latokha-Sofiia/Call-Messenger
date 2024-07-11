@@ -10,7 +10,7 @@ export interface TodosStore {
   todos: Todo[]
   addTodos(todos: Todo[]): void
   updateTodo(updatedTodo: Todo): void
-  // setTodos(todos: Todo[]): void
+  // setTodos(todos: todoStore[]): void
   removeTodo(id: string): void
   completeTodo(id: string): void
   cleanTodos(): void
@@ -42,7 +42,7 @@ export class TodosStoreImpl implements TodosStore {
     )
   }
 
-  // setTodos(todos: Todo[]) {
+  // setTodos(todos: todoStore[]) {
   //   this.todos = todos
   // }
 
