@@ -1,3 +1,9 @@
+.scrollContainer {
+  height: 100vh;
+  overflow-y: auto;
+}
+
+
 .oneTodoList {
   background-color: var(--light-blue);
   width: max-content;

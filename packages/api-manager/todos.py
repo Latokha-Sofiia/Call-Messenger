@@ -49,8 +49,23 @@ todos = [
 @app.route('/todos', methods=['GET'])
 @cross_origin()
 def get_todos():
-    response = jsonify(todos)
-    return response
+    page_size = int(request.args.get('pageSize', 10))
+    tag = request.args.get('tag')
+
+    start_index = 0
+    if tag:
+        start_index = next((i for i, todo in enumerate(todos) if str(todo['id']) == tag), len(todos))
+
+    paginated_todos = todos[start_index:start_index + page_size]
+    next_tag = None
+    if len(todos) > start_index + page_size:
+        next_tag = str(todos[start_index + page_size]['id'])
+
+    response = {
+        'todos': paginated_todos,
+        'tag': next_tag
+    }
+    return jsonify(response)
 
 @app.route('/todos', methods=['POST'])
 @cross_origin()
