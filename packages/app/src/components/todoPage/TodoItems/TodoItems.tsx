@@ -87,7 +87,7 @@ const Todo = observer(() => {
           active={modalActive}
           setActive={setModalActive}
           childrenContent={""}
-          childrenTitle={"todoStore нас покинуло..."}
+          childrenTitle={"todo нас покинуло..."}
           catType={CatType.sad}
         />
       </div>

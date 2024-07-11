@@ -5,12 +5,10 @@ import ListOfConferences from "../../../components/conferences/ListOfConferences
 
 interface MessageBoardProps {
   buttonText: string
-  tabsItems: string[]
 }
 
 export const MessageBoard: React.FC<MessageBoardProps> = ({
   buttonText,
-  tabsItems,
 }) => {
   return (
     <div className={styles.rainbowFrame}>
@@ -20,7 +18,7 @@ export const MessageBoard: React.FC<MessageBoardProps> = ({
           <img className={styles.imgOnButton} src="/phone-for-button-call.svg" />
           {buttonText}
         </button>
-        <ListOfConferences tabsItems={tabsItems} />
+        <ListOfConferences />
       </div>
     </div>
   )
