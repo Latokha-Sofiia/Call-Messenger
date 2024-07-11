@@ -82,5 +82,5 @@ export class ConferencesControllerImpl implements ConferencesController {
   }
 }
 
-const apiClient = new ApiClient({ baseUrl: "http://localhost", port: 5000 })
+const apiClient = new ApiClient({ baseUrl: "http://localhost", port: 5001 })
 export const conferencesController = new ConferencesControllerImpl(apiClient)

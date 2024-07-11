@@ -2,9 +2,11 @@
   margin: 0 16px;
   display: flex;
   flex-wrap: wrap;
+  min-height: 100vh;
 }
 
 .tabs {
+  height: 48px;
   display: flex;
   gap: 8px;
   color: #9298a0;
@@ -25,4 +27,5 @@
   display: flex;
   flex-wrap: wrap;
   user-select: none;
+  min-height: 100vh;
 }
