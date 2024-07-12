@@ -49,7 +49,7 @@ todos = [
 @app.route('/todos', methods=['GET'])
 @cross_origin()
 def get_todos():
-    page_size = int(request.args.get('pageSize', 10))
+    page_size = int(request.args.get('pageSize', 30))
     tag = request.args.get('tag')
 
     start_index = 0

@@ -18,7 +18,6 @@ const listOfConferences = observer(() => {
     const activeConf = conferencesStore.conferences.filter((conf) => conf.status === "active")
     const plannedConf = conferencesStore.conferences.filter((conf) => conf.status === "planned")
     const pastConf = conferencesStore.conferences.filter((conf) => conf.status === "past")
-    const tabsItems = ["Активные", "Запланированные", "Прошедшие"]
     // const tabsItems = ["active", "planned", "past"]
 
     const handleRemoveConf = async (id: string) => {
@@ -29,7 +28,7 @@ const listOfConferences = observer(() => {
     const handleScroll = useCallback(
         async (event: React.UIEvent<HTMLDivElement>) => {
             const { scrollTop, scrollHeight, clientHeight } = event.currentTarget
-            if (scrollHeight - scrollTop <= clientHeight + 50) {
+            if (scrollHeight - scrollTop - clientHeight >= 0) {
                 await conferencesController.loadMoreConferences()
             }
         },
@@ -41,25 +40,18 @@ const listOfConferences = observer(() => {
 
     return (
         <div className={styles.wrapper}>
-            <div className={styles.tabs}>
-                {tabsItems.map((tab, index) => (
-                    <div key={index} className={styles.oneTab}>{tab}</div>
-                ))}
-            </div>
-
-
-
-            <div className={styles.allChats}>
+            <div className={styles.scrollContainer} onScroll={handleScroll}>
+              <div className={styles.allChats}>
                 {activeConf.map((conf) => (
-                    <div key={conf.id}>
-                        <div>
-                            <ConfChatsOnLeftPanel title={conf.title} date={conf.date} photo_url={conf.photo_url}></ConfChatsOnLeftPanel>
-                        </div>
+                  <div key={conf.id}>
+                    <div className={styles.oneChat}>
+                      <ConfChatsOnLeftPanel title={conf.title} date={conf.date} photo_url={conf.photo_url}></ConfChatsOnLeftPanel>
                     </div>
+                  </div>
                 ))}
-
-
+              </div>
             </div>
+
         </div>
     )})
 

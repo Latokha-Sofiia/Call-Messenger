@@ -1,3 +1,5 @@
+import { makeAutoObservable } from 'mobx';
+
 export interface Conference {
   id: string
   title: string
@@ -21,6 +23,9 @@ export interface ConferencesStore {
 
 export class ConferencesStoreImpl implements ConferencesStore {
   conferences: Conference[] = []
+  constructor() {
+    makeAutoObservable(this)
+  }
   addConferences(newConferences: Conference[]) {
     const existingConfIds = this.conferences.map((conf) => conf.id)
     const newConf = newConferences.filter(
