@@ -18,7 +18,7 @@ export default function CreateTodo() {
   }
 
   return (
-    <div className={styles.wrapper}>
+  <div className={styles.wrapper}>
       <div className={styles.inputWrapper}>
         <input
           value={inputValue}
@@ -30,6 +30,7 @@ export default function CreateTodo() {
       <div onClick={onClickAddTodo} className={styles.addTodo}>
         +
       </div>
+
       <TodoModal
         active={modalActive}
         setActive={setModalActive}

@@ -1,12 +1,15 @@
 .inputWrapper {
   display: flex;
   align-items: center;
-  width: fit-content;
   border-bottom: #3b5683 1px solid;
   background: var(--light-blue);
   border-radius: 8px;
   height: 32px;
   padding: 8px;
+  position: fixed;
+  margin-top: 40px;
+  width: 48vw;
+
 }
 
 .wrapper {
@@ -22,12 +25,13 @@
   background-color: transparent;
   outline: none;
   padding: 5px;
-  width: 300px;
   font-family: Roboto, serif;
   font-size: 14px;
 }
 
+
 .addTodo {
+  position: fixed;
   width: 28px;
   height: 28px;
   font-size: 28px;
@@ -38,7 +42,9 @@
   border-radius: 6px;
   cursor: pointer;
   user-select: none;
-  margin-left: 10px;
+  margin-left: 50vw;
+  margin-top: 40px;
+
 
   &:hover {
     background: var(--rainbow-background);

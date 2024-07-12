@@ -10,15 +10,28 @@ interface MessageBoardProps {
 export const MessageBoard: React.FC<MessageBoardProps> = ({
   buttonText,
 }) => {
+  const tabsItems = ["Активные", "Запланированные", "Прошедшие"]
+
   return (
     <div className={styles.rainbowFrame}>
       <div className={styles.wrapper}>
-        <SearchBar />
-        <button className={styles.CreateConferenceButton}>
-          <img className={styles.imgOnButton} src="/phone-for-button-call.svg" />
-          {buttonText}
-        </button>
-        <ListOfConferences />
+        <div className={styles.fixedPosition}>
+          <SearchBar />
+          <button className={styles.CreateConferenceButton}>
+            <img className={styles.imgOnButton} src="/phone-for-button-call.svg" />
+            {buttonText}
+          </button>
+
+          <div className={styles.tabs}>
+            {tabsItems.map((tab, index) => (
+              <div key={index} className={styles.oneTab}>{tab}</div>
+            ))}
+          </div>
+        </div>
+
+        <div className={styles.listOfConferences}>
+          <ListOfConferences />
+        </div>
       </div>
     </div>
   )

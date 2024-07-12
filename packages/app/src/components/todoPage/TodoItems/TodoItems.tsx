@@ -26,7 +26,7 @@ const Todo = observer(() => {
   const handleScroll = useCallback(
     async (event: React.UIEvent<HTMLDivElement>) => {
       const { scrollTop, scrollHeight, clientHeight } = event.currentTarget
-      if (scrollHeight - scrollTop <= clientHeight + 50) {
+      if (scrollHeight - scrollTop - clientHeight >= 0 ) {
         await todoController.loadMoreTodos()
       }
     },

@@ -28,6 +28,8 @@
 .allTodos {
   display: flex;
   flex-wrap: wrap;
+  margin-top: 40px;
+
 }
 
 .listTitle {
@@ -58,29 +60,13 @@
 }
 
 .checkboxComplete {
-  transform: scale(1.7);
+  width: 21px;
   user-select: none;
   cursor: pointer;
 
   &:before {
     align-content: center;
     height: 12.6px;
-    content: "";
-    position: absolute;
-    top: 8px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: var(--rainbow-background);
-    background-size: 400%;
-    border-radius: 20%;
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-    animation: glowing 20s linear infinite;
-
-    color: var(--button-blue);
-    font-weight: 700;
   }
 
   &:hover:before {
