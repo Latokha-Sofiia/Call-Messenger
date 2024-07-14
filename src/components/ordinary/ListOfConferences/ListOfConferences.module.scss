@@ -1,0 +1,31 @@
+.wrapper {
+  //margin: 0 16px;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100vh;
+  //position: fixed;
+  background-color: var(--light-blue);
+  padding: 0 16px;
+}
+
+.scrollContainer {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+
+
+.allChats {
+  display: flex;
+  flex-wrap: wrap;
+  user-select: none;
+  min-height: 100vh;
+  align-content: center;
+  width: 350px;
+}
+
+.oneChat {
+  cursor: pointer;
+}
+
