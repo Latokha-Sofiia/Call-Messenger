@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite"
-import { todosStore } from "../../../core/store/TodoStore/TodoStore"
+import { todosStore } from "@/core/store/TodoStore/TodoStore"
 import React, { useEffect, useState, useCallback } from "react"
-import { todoController } from "../../../core/controllers/TodoController/TodoControllerImpl"
+import { todoController } from "@/core/controllers/TodoController/TodoControllerImpl"
 import * as styles from "./TodoItem.module.scss"
 import TodoModal, { CatType } from "../../../core/constants/TodoModal/TodoModal"
 

@@ -21,16 +21,15 @@ export interface IApiClient {
   ): Promise<AxiosResponse<T>>
 }
 
+
 export class ApiClient implements IApiClient {
   private axiosInstance: AxiosInstance
-
   constructor(config: ApiClientConfig) {
     const { baseUrl, port } = config
     this.axiosInstance = axios.create({
       baseURL: `${baseUrl}${port ? `:${port}` : ""}`,
     })
   }
-
   get<T>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>> {
     return this.axiosInstance.get<T>(url, config)
   }

@@ -1,12 +1,13 @@
 import React from "react"
-import MessageBoard from "../../components/smart/MessageBoard/MessageBoard"
+import LeftPanel from "../../components/smart/LeftPanel/LeftPanel"
 
 const CallsPage = () => {
-  // const tabs = ["Все звонки", "Пропущенные"]
+  const tabsItems = ["Все звонки", "Пропущенные"]
+  const buttonText = "Создать звонок"
 
   return (
     <div>
-      <MessageBoard buttonText="Создать звонок"></MessageBoard>
+      {/*<LeftPanel buttonText={buttonText} tabsItems={tabsItems}></LeftPanel>*/}
     </div>
   )
 }

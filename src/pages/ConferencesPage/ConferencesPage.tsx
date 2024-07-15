@@ -1,13 +1,15 @@
 import React from "react"
-import MessageBoard from "../../components/smart/MessageBoard/MessageBoard"
+import LeftPanel from "../../components/smart/LeftPanel/LeftPanel"
 
 const ConferencesPage = () => {
+  const tabsItems: string[] = ["Активные", "Запланированные", "Прошедшие"]
+  const buttonText: string = "Создать конференцию"
 
   return (
     <div>
-      <MessageBoard
-        buttonText="Создать конференцию"
-      ></MessageBoard>
+      <LeftPanel
+        buttonText={buttonText} tabsItems={tabsItems}
+      ></LeftPanel>
     </div>
   )
 }
