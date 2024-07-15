@@ -1,0 +1,35 @@
+.wrapper {
+  border-radius: 8px;
+  background: var(--transparent-blue);
+  display: flex;
+  height: 32px;
+  margin: 8px 0 8px 16px;
+  align-items: center;
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 8px;
+}
+
+.searchLogo {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  user-select: none;
+  margin-right: 36px;
+}
+
+.searchInput {
+  color: #9298a0;
+  font-family: Roboto, serif;
+  font-size: 14px;
+  user-select: none;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  padding: 5px;
+  width: 300px;
+}

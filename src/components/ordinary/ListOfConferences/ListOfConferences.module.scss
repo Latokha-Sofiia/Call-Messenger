@@ -1,0 +1,23 @@
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: var(--light-blue);
+  padding: 0 16px;
+}
+
+.scrollContainer {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.allChats {
+  display: flex;
+  flex-wrap: wrap;
+  user-select: none;
+  align-content: start;
+}
+
+.oneChat {
+  cursor: pointer;
+}
+
