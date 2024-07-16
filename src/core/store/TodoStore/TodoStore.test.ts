@@ -3,7 +3,7 @@ import { Todo, TodosStore, TodosStoreImpl } from "./TodoStore"
 function createTodos(): Todo[] {
   return [
     { id: "1", title: "TodoStore 1", completed: true },
-    { id: "2", title: "TodoStore 2", completed: false },
+    { id: "2", title: "TodoStore 2", completed: false }
   ]
 }
 
@@ -16,6 +16,11 @@ describe("TodoStore", () => {
 
   it("addTodo method should add new todos to the existing list", () => {
     todosStore.addTodos(createTodos())
+    expect(todosStore.todos).toEqual(createTodos())
+  })
+
+  it("loadMoreTodos method should add new todos to the existing list", () => {
+    todosStore.loadMoreTodos(createTodos())
     expect(todosStore.todos).toEqual(createTodos())
   })
 

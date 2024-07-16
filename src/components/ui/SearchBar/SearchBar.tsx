@@ -8,7 +8,7 @@ export const SearchBar = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.inputWrapper}>
-        <img src="/icons/search.svg" className={styles.searchLogo}/>
+        <img src="/icons/search.svg" className={styles.searchLogo} />
         <input
           // value={inputValue}
           onInput={onInput}

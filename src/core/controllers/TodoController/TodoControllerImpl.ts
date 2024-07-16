@@ -7,7 +7,7 @@ import {
 } from "../../store/TodoStore/TodoStore"
 
 export class TodoControllerImpl implements TodoController {
-  private nextTag: string | undefined = undefined;
+  private nextTag: string | undefined = undefined
 
   constructor(
     private apiClient: IApiClient,
@@ -16,24 +16,29 @@ export class TodoControllerImpl implements TodoController {
 
   async fetchTodos(pageSize: number = 30) {
     try {
-      const response = await this.apiClient.get<{ todos: Todo[], tag: string }>("/todos", {
-        params: { }
-      })
-      this.todosStore.cleanTodos()
-      this.todosStore.addTodos(response.data.todos)
+      const response = await this.apiClient.get<{ todos: Todo[]; tag: string }>(
+        "/todos",
+        {
+          params: {},
+        }
+      )
+      response.data.todos.forEach((todo) => this.todosStore.updateTodo(todo))
       this.nextTag = response.data.tag
     } catch (error) {
       console.error("Error fetching todos:", error)
     }
   }
   async loadMoreTodos(pageSize: number = 30) {
-    if (!this.nextTag) return;
+    if (!this.nextTag) return
     try {
-      console.log('todo scroll');
-      const response = await this.apiClient.get<{ todos: Todo[], tag: string }>("/todos", {
-        params: { pageSize, tag: this.nextTag }
-      })
-      this.todosStore.addTodos(response.data.todos)
+      console.log("todo scroll")
+      const response = await this.apiClient.get<{ todos: Todo[]; tag: string }>(
+        "/todos",
+        {
+          params: { pageSize, tag: this.nextTag },
+        }
+      )
+      this.todosStore.loadMoreTodos(response.data.todos)
       this.nextTag = response.data.tag
     } catch (error) {
       console.error("Error loading more todos:", error)
@@ -42,9 +47,11 @@ export class TodoControllerImpl implements TodoController {
 
   async addTodo(title: string) {
     try {
-      const response = await this.apiClient.post<Todo[]>("/todos", { title })
-      const newTodos: Todo[] = response.data
-      this.todosStore.addTodos(newTodos)
+      if (title.trim() !== "") {
+        const response = await this.apiClient.post<Todo[]>("/todos", { title })
+        const newTodos: Todo[] = response.data
+        this.todosStore.addTodos(newTodos)
+      }
     } catch (error) {
       console.error("Error adding todo:", error)
     }

@@ -1,4 +1,6 @@
 import { makeAutoObservable } from "mobx"
+import { notificationController } from "../../controllers/NotificationController/NotificationController"
+import { CatType } from "../NotificationStore/NotificationStore"
 
 export interface Todo {
   id: string
@@ -9,6 +11,7 @@ export interface Todo {
 export interface TodosStore {
   todos: Todo[]
   addTodos(todos: Todo[]): void
+  loadMoreTodos(todos: Todo[]): void
   updateTodo(updatedTodo: Todo): void
   removeTodo(id: string): void
   completeTodo(id: string): void
@@ -26,13 +29,20 @@ export class TodosStoreImpl implements TodosStore {
     const existingIds = this.todos.map((todo) => todo.id)
     const newTodos = todos.filter((todo) => !existingIds.includes(todo.id))
     this.todos = [...this.todos, ...newTodos]
+    notificationController.showNotification("Добавлено новое TODO:", CatType.happy, todos[0].title)
+  }
+
+  loadMoreTodos(todos: Todo[]) {
+    const existingIds = this.todos.map((todo) => todo.id)
+    const newTodos = todos.filter((todo) => !existingIds.includes(todo.id))
+    this.todos = [...this.todos, ...newTodos]
   }
 
   updateTodo(updatedTodo: Todo) {
     const todoIndex = this.todos.findIndex((todo) => todo.id === updatedTodo.id)
     if (todoIndex !== -1) {
       this.todos[todoIndex] = updatedTodo
-    } else {
+    } else if (updatedTodo.title.trim() !== "") {
       this.todos = [...this.todos, updatedTodo]
     }
 
@@ -43,6 +53,7 @@ export class TodosStoreImpl implements TodosStore {
 
   removeTodo(id: string) {
     this.todos = this.todos.filter((todo) => todo.id !== id)
+    notificationController.showNotification("Todo нас покинуло...", CatType.sad, "")
   }
 
   completeTodo(id: string) {
