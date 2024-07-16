@@ -3,7 +3,10 @@ import { todosStore } from "@/core/store/TodoStore/TodoStore"
 import React, { useEffect, useState, useCallback } from "react"
 import { todoController } from "@/core/controllers/TodoController/TodoControllerImpl"
 import * as styles from "./TodoItem.module.scss"
-import TodoModal, { CatType } from "../../../core/constants/TodoModal/TodoModal"
+import TodoNotification, {
+  CatType,
+} from "../../../core/constants/TodoNotification/TodoNotification"
+import NotificationList from "@/core/constants/TodoNotification/NotificationList"
 
 const TodoItems = observer(() => {
   useEffect(() => {
@@ -26,7 +29,7 @@ const TodoItems = observer(() => {
   const handleScroll = useCallback(
     async (event: React.UIEvent<HTMLDivElement>) => {
       const { scrollTop, scrollHeight, clientHeight } = event.currentTarget
-      if (scrollHeight - scrollTop - clientHeight >= 0 ) {
+      if (scrollHeight - scrollTop - clientHeight >= 0) {
         await todoController.loadMoreTodos()
       }
     },
@@ -83,14 +86,8 @@ const TodoItems = observer(() => {
             ))}
           </div>
         </div>
-        <TodoModal
-          active={modalActive}
-          setActive={setModalActive}
-          childrenContent={""}
-          childrenTitle={"todo нас покинуло..."}
-          catType={CatType.sad}
-        />
       </div>
+      <NotificationList />
     </div>
   )
 })

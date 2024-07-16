@@ -1,4 +1,4 @@
-import React, { useState }  from "react"
+import React, { useState } from "react"
 import * as styles from "./TabsOnTheLeftPanel.module.scss"
 
 export interface ITabsOnTheLeftPanel {
@@ -6,12 +6,15 @@ export interface ITabsOnTheLeftPanel {
   onTabClick: (index: number) => void
 }
 
-export const TabsOnTheLeftPanel: React.FC<ITabsOnTheLeftPanel> = ({tabsItems, onTabClick}) => {
-  const [indexActiveTab, setIndexActiveTab] = useState<number>(0);
+export const TabsOnTheLeftPanel: React.FC<ITabsOnTheLeftPanel> = ({
+  tabsItems,
+  onTabClick,
+}) => {
+  const [indexActiveTab, setIndexActiveTab] = useState<number>(0)
 
   const changeActiveTab = (index: number) => {
-    setIndexActiveTab(index);
-    onTabClick(index);
+    setIndexActiveTab(index)
+    onTabClick(index)
   }
 
   return (
@@ -21,7 +24,9 @@ export const TabsOnTheLeftPanel: React.FC<ITabsOnTheLeftPanel> = ({tabsItems, on
           key={index}
           className={`${styles.oneTab} ${index === indexActiveTab ? styles.active : ""}`}
           onClick={() => changeActiveTab(index)}
-        >{tab}</div>
+        >
+          {tab}
+        </div>
       ))}
     </div>
   )

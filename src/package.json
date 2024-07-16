@@ -5,6 +5,7 @@
     "@core/constants": "*",
     "@core/models": "*",
     "@core/store": "*",
+    "@src/assets": "*",
     "@core/controllers": "*",
     "@src/components": "*",
     "@src/pages": "*",
@@ -21,7 +22,8 @@
     "build:dev": "webpack --env mode=development",
     "build:prod": "webpack --env mode=production",
     "build:mobile": "webpack --env mode=production --env platform=mobile",
-    "build:desktop": "webpack --env mode=production --env platform=desktop"
+    "build:desktop": "webpack --env mode=production --env platform=desktop",
+    "test": "jest"
   },
   "devDependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",

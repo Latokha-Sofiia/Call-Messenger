@@ -1,11 +1,10 @@
 import React, { useState } from "react"
 import * as styles from "./CreateTodo.module.scss"
-import { todoController } from "../../../core/controllers/TodoController/TodoControllerImpl"
-import TodoModal, { CatType } from "../../../core/constants/TodoModal/TodoModal"
+import { todoController } from "@/core/controllers/TodoController/TodoControllerImpl"
+import NotificationList from "@/core/constants/TodoNotification/NotificationList"
 
 export default function CreateTodo() {
   const [inputValue, setInputValue] = useState("")
-  const [modalActive, setModalActive] = useState(false)
 
   const onInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value)
@@ -13,12 +12,11 @@ export default function CreateTodo() {
 
   const onClickAddTodo = async () => {
     await todoController.addTodo(inputValue)
-    setModalActive(true)
-    // TODO добавить setInputValue("")
+    setInputValue("")
   }
 
   return (
-  <div className={styles.wrapper}>
+    <div className={styles.wrapper}>
       <div className={styles.inputWrapper}>
         <input
           value={inputValue}
@@ -31,13 +29,7 @@ export default function CreateTodo() {
         +
       </div>
 
-      <TodoModal
-        active={modalActive}
-        setActive={setModalActive}
-        childrenTitle={"Добавлено новое todo:"}
-        childrenContent={inputValue}
-        catType={CatType.happy}
-      ></TodoModal>
+      <NotificationList />
     </div>
   )
 }

@@ -2,18 +2,19 @@ import React from "react"
 import * as styles from "./ConfChatsOnLeftPanel.module.scss"
 
 interface OneChatOnLeftPanel {
-    title: string
-    date: string
-    photo_url: string
+  title: string
+  date: string
+  photo_url: string
 }
-export const ConfChatsOnLeftPanel: React.FC<OneChatOnLeftPanel> = ({title, date, photo_url}) => {
+export const ConfChatsOnLeftPanel: React.FC<OneChatOnLeftPanel> = ({
+  title,
+  date,
+  photo_url,
+}) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.conferenceLogo}>
-        <img
-          src={photo_url}
-          className={styles.photoConferenceGroup}
-        />
+        <img src={photo_url} className={styles.photoConferenceGroup} />
         <img src="/icons/active-call.svg" className={styles.phoneLogo} />
       </div>
       <div className={styles.dataTextOfChat}>

@@ -2,7 +2,9 @@ import React, { useState } from "react"
 import * as styles from "./LeftPanel.module.scss"
 import SearchBar from "../../ui/SearchBar/SearchBar"
 import ListOfConferences from "../../ordinary/ListOfConferences/ListOfConferences"
-import TabsOnTheLeftPanel, { ITabsOnTheLeftPanel } from "@/components/ui/TabsOnTheLeftPanel/TabsOnTheLeftPanel"
+import TabsOnTheLeftPanel, {
+  ITabsOnTheLeftPanel,
+} from "@/components/ui/TabsOnTheLeftPanel/TabsOnTheLeftPanel"
 
 interface IMessageBoardProps {
   buttonText: string
@@ -10,12 +12,12 @@ interface IMessageBoardProps {
 }
 
 export const LeftPanel: React.FC<IMessageBoardProps> = ({
-  buttonText, tabsItems
+  buttonText,
+  tabsItems,
 }) => {
-
-  const [activeTab, setActiveTab] = useState<number>(0);
+  const [activeTab, setActiveTab] = useState<number>(0)
   const handleTabClick = (index: number) => {
-    setActiveTab(index);
+    setActiveTab(index)
   }
 
   return (
@@ -24,14 +26,20 @@ export const LeftPanel: React.FC<IMessageBoardProps> = ({
         <div className={styles.fixedPosition}>
           <SearchBar />
           <button className={styles.CreateConferenceButton}>
-            <img className={styles.imgOnButton} src="/icons/phone-for-button-call.svg" />
+            <img
+              className={styles.imgOnButton}
+              src="/icons/phone-for-button-call.svg"
+            />
             {buttonText}
           </button>
-          <TabsOnTheLeftPanel tabsItems={tabsItems} onTabClick={handleTabClick}/>
+          <TabsOnTheLeftPanel
+            tabsItems={tabsItems}
+            onTabClick={handleTabClick}
+          />
         </div>
 
         <div className={styles.listOfConferences}>
-          <ListOfConferences activeTab={activeTab}/>
+          <ListOfConferences activeTab={activeTab} />
         </div>
       </div>
     </div>
