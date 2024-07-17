@@ -8,6 +8,7 @@
     "@types/mocha": "^10.0.7",
     "axios": "^1.7.2",
     "json-server": "^0.16.3",
+    "lodash": "^4.17.21",
     "mobx": "^6.12.4",
     "mobx-react": "^9.1.1",
     "mobx-react-lite": "^4.0.7",

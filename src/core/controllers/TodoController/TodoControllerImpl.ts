@@ -31,7 +31,7 @@ export class TodoControllerImpl implements TodoController {
   async loadMoreTodos(pageSize: number = 30) {
     if (!this.nextTag) return
     try {
-      console.log("todo scroll")
+      console.log("todo пагинация")
       const response = await this.apiClient.get<{ todos: Todo[]; tag: string }>(
         "/todos",
         {

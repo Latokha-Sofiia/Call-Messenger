@@ -1,0 +1,76 @@
+import React, { useCallback, useEffect, useState } from "react"
+import * as styles from "./ConfContainer.module.scss"
+import ConfItem from "../../confPage/ConfItem/ConfItem"
+import { observer } from "mobx-react-lite"
+import { conferencesController } from "@/core/controllers/ConferencesController/ConferencesControllerImpl"
+import { conferencesStore } from "@/core/store/ConferencesStore/ConferencesStore"
+// import { debounce } from "lodash"
+
+interface IListOfConferences {
+  activeTab: number
+}
+
+const confContainer: React.FC<IListOfConferences> = observer(
+  ({ activeTab }) => {
+    useEffect(() => {
+      conferencesController.fetchConferences()
+    }, [])
+
+    const [modalActive, setModalActive] = useState(false)
+    const activeConf = conferencesStore.conferences.filter(
+      (conf) => conf.status === "active"
+    )
+    const plannedConf = conferencesStore.conferences.filter(
+      (conf) => conf.status === "planned"
+    )
+    const pastConf = conferencesStore.conferences.filter(
+      (conf) => conf.status === "completed"
+    )
+
+    const handleRemoveConf = async (id: string) => {
+      await conferencesController.removeConferences(id)
+      setModalActive(true)
+    }
+
+    const handleScroll = useCallback(
+      // debounce(
+      (event: React.UIEvent<HTMLDivElement>) => {
+        console.log("handleScroll Conf")
+        const { scrollTop, scrollHeight, clientHeight } = event.currentTarget
+        if (scrollHeight - scrollTop - clientHeight <= 0) {
+          conferencesController.loadMoreConferences()
+        }
+      },
+      // 300),
+      []
+    )
+
+    const getConferences = () => {
+      if (activeTab === 0) return activeConf
+      if (activeTab === 1) return plannedConf
+      return pastConf
+    }
+
+    return (
+      <div className={styles.wrapper}>
+        <div className={styles.scrollContainer} onScroll={handleScroll}>
+          <div className={styles.allChats}>
+            {getConferences().map((conf) => (
+              <div key={conf.id}>
+                <div className={styles.oneChat}>
+                  <ConfItem
+                    title={conf.title}
+                    date={conf.date}
+                    photo_url={conf.photo_url}
+                  ></ConfItem>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    )
+  }
+)
+
+export default confContainer

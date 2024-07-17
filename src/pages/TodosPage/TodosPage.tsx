@@ -1,6 +1,6 @@
 import React, { useState } from "react"
-import TodoItems from "../../components/ordinary/TodoItems/TodoItems"
-import CreateTodo from "../../components/ui/CreateTodoInput/CreateTodo"
+import TodoItems from "../../components/todoPage/TodoItems/TodoItems"
+import CreateTodo from "../../components/todoPage/CreateTodoInput/CreateTodo"
 import * as styles from "./TodoPage.module.scss"
 
 export default function TodosPage() {

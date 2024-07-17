@@ -1,12 +1,12 @@
 import * as React from "react"
 import * as styles from "./App.module.scss"
 import { Outlet } from "react-router-dom"
-import Sidebar from "./components/simple/Sidebar/Sidebar"
+import NavigationPanel from "./components/NavigationPanel/NavigationPanel"
 
 export const App = () => {
   return (
     <div className={styles.wrapper}>
-      <Sidebar></Sidebar>
+      <NavigationPanel></NavigationPanel>
       <div className={styles.main_content}>
         <Outlet />
       </div>

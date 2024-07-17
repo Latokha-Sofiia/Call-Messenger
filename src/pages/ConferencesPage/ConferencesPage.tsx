@@ -1,5 +1,5 @@
 import React from "react"
-import LeftPanel from "../../components/smart/LeftPanel/LeftPanel"
+import ChatSidebar from "../../components/sidebar/ChatSidebar/ChatSidebar"
 
 const ConferencesPage = () => {
   const tabsItems: string[] = ["Активные", "Запланированные", "Прошедшие"]
@@ -7,9 +7,7 @@ const ConferencesPage = () => {
 
   return (
     <div>
-      <LeftPanel
-        buttonText={buttonText} tabsItems={tabsItems}
-      ></LeftPanel>
+      <ChatSidebar buttonText={buttonText} tabsItems={tabsItems}></ChatSidebar>
     </div>
   )
 }
