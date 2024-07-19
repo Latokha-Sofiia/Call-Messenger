@@ -1,10 +1,16 @@
 export type TodoId = string
 
-export interface Todo {
+export interface ITodo {
   id: TodoId
   title: string
   description: string
-  completed: "open" | "in-progress" | "done"
+  completed: boolean
+}
+
+export interface IOneChatOnSidebar {
+  title: string
+  date: string
+  photo_url: string
 }
 
 export interface IConference {

@@ -1,44 +1,44 @@
 import { makeAutoObservable } from "mobx"
 import { notificationController } from "../../controllers/NotificationController/NotificationController"
-import { CatType } from "../NotificationStore/NotificationStore"
-
-export interface Todo {
-  id: string
-  title: string
-  completed: boolean
-}
+import { ITodo } from "@/core/models"
+import { INotificationType } from "@/core/constants/Notifications/NotificationsTypes"
 
 export interface TodosStore {
-  todos: Todo[]
-  addTodos(todos: Todo[]): void
-  loadMoreTodos(todos: Todo[]): void
-  updateTodo(updatedTodo: Todo): void
+  todos: ITodo[]
+  addTodos(todos: ITodo[]): void
+  loadMoreTodos(todos: ITodo[]): void
+  updateTodo(updatedTodo: ITodo): void
   removeTodo(id: string): void
   completeTodo(id: string): void
   cleanTodos(): void
 }
 
 export class TodosStoreImpl implements TodosStore {
-  todos: Todo[] = []
+  todos: ITodo[] = []
 
   constructor() {
     makeAutoObservable(this)
   }
 
-  addTodos(todos: Todo[]) {
+  addTodos(todos: ITodo[]) {
+    const existingIds = this.todos.map((todo) => todo.id)
+    const newTodos = todos.filter((todo) => !existingIds.includes(todo.id))
+    this.todos = [...newTodos, ...this.todos]
+    notificationController.showNotification(
+      "Добавлено новое TODO:",
+      INotificationType.Added,
+      todos[0].title,
+      () => {}
+    )
+  }
+
+  loadMoreTodos(todos: ITodo[]) {
     const existingIds = this.todos.map((todo) => todo.id)
     const newTodos = todos.filter((todo) => !existingIds.includes(todo.id))
     this.todos = [...this.todos, ...newTodos]
-    notificationController.showNotification("Добавлено новое TODO:", CatType.happy, todos[0].title)
   }
 
-  loadMoreTodos(todos: Todo[]) {
-    const existingIds = this.todos.map((todo) => todo.id)
-    const newTodos = todos.filter((todo) => !existingIds.includes(todo.id))
-    this.todos = [...this.todos, ...newTodos]
-  }
-
-  updateTodo(updatedTodo: Todo) {
+  updateTodo(updatedTodo: ITodo) {
     const todoIndex = this.todos.findIndex((todo) => todo.id === updatedTodo.id)
     if (todoIndex !== -1) {
       this.todos[todoIndex] = updatedTodo
@@ -53,13 +53,36 @@ export class TodosStoreImpl implements TodosStore {
 
   removeTodo(id: string) {
     this.todos = this.todos.filter((todo) => todo.id !== id)
-    notificationController.showNotification("Todo нас покинуло...", CatType.sad, "")
+    notificationController.showNotification(
+      "Todo нас покинуло...",
+      INotificationType.Removed,
+      "",
+      () => {}
+    )
   }
 
   completeTodo(id: string) {
     this.todos = this.todos.map((todo) =>
       todo.id === id ? { ...todo, completed: !todo.completed } : todo
     )
+
+    const todoItem = this.todos.find((todo) => todo.id === id)
+
+    if (todoItem.completed) {
+      notificationController.showNotification(
+        "Неужели ты наконец-то сделал это???",
+        INotificationType.Completed,
+        todoItem.title,
+        () => {}
+      )
+    } else {
+      notificationController.showNotification(
+        "Куда делось Todo?",
+        INotificationType.NotCompleted,
+        "",
+        () => {}
+      )
+    }
   }
 
   cleanTodos() {

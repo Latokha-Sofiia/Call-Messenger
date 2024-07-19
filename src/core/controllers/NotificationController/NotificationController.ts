@@ -1,11 +1,11 @@
 import { notificationStore } from "../../store/NotificationStore/NotificationStore"
 import { v4 as uuidv4 } from "uuid"
-import { CatType } from "../../store/NotificationStore/NotificationStore"
+import { INotificationType } from "@/core/constants/Notifications/NotificationsTypes"
 
 export class NotificationController {
   showNotification(
     message: string,
-    type: CatType,
+    type: INotificationType,
     content: string,
     setActive: () => void
   ) {

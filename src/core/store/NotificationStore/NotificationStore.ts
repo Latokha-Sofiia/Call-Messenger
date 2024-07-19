@@ -1,4 +1,5 @@
 import { makeAutoObservable } from "mobx"
+import { INotificationType } from "@/core/constants/Notifications/NotificationsTypes"
 
 export enum CatType {
   happy,
@@ -10,7 +11,7 @@ export interface Notification {
   setActive: () => void
   message: string
   content: string
-  type: CatType
+  type: INotificationType
 }
 
 export class NotificationStore {

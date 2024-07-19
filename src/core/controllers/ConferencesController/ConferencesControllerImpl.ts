@@ -13,7 +13,7 @@ export class ConferencesControllerImpl implements ConferencesController {
     private conferencesStore: ConferencesStore = defaultConferencesStore
   ) {}
 
-  async fetchConferences(pageSize: number = 30) {
+  async fetchConferences(pageSize: number = 60) {
     try {
       const response = await this.apiClient.get<{
         conferences: Conference[]
@@ -29,7 +29,7 @@ export class ConferencesControllerImpl implements ConferencesController {
     }
   }
 
-  async loadMoreConferences(pageSize: number = 30) {
+  async loadMoreConferences(pageSize: number = 60) {
     if (!this.nextTag) return
     try {
       console.log("Conf пагинация")
@@ -39,7 +39,7 @@ export class ConferencesControllerImpl implements ConferencesController {
       }>("/conferences", {
         params: { pageSize, tag: this.nextTag },
       })
-      this.conferencesStore.addConferences(response.data.conferences)
+      this.conferencesStore.loddMoreConferences(response.data.conferences)
       this.nextTag = response.data.tag
     } catch (error) {
       console.log("Error loading more ConferencesPage", error)
@@ -77,7 +77,7 @@ export class ConferencesControllerImpl implements ConferencesController {
       await this.apiClient.delete(`/conferences?id=${id}`)
       this.conferencesStore.removeConference(id)
     } catch (error) {
-      console.log("Error removing ConferencesPage:", error);
+      console.log("Error removing ConferencesPage:", error)
     }
   }
 }
