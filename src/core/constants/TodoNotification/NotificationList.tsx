@@ -2,6 +2,7 @@ import React from "react"
 import { observer } from "mobx-react-lite"
 import { notificationStore } from "@/core/store/NotificationStore/NotificationStore"
 import TodoNotification from "@/core/constants/TodoNotification/TodoNotification"
+import { INotificationType } from "../Notifications/NotificationsTypes"
 
 const NotificationList = observer(() => {
   return (
@@ -14,7 +15,7 @@ const NotificationList = observer(() => {
           }
           childrenContent={notification.content}
           childrenTitle={notification.message}
-          catType={notification.type}
+          type={notification.type as INotificationType}
         />
       ))}
     </>

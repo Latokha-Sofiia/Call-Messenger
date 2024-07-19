@@ -1,10 +1,17 @@
-import React, { useCallback, useEffect, useState } from "react"
+import React, { Fragment, useCallback, useEffect, useState } from "react"
 import * as styles from "./ConfContainer.module.scss"
 import ConfItem from "../../confPage/ConfItem/ConfItem"
 import { observer } from "mobx-react-lite"
 import { conferencesController } from "@/core/controllers/ConferencesController/ConferencesControllerImpl"
 import { conferencesStore } from "@/core/store/ConferencesStore/ConferencesStore"
+import ConfChat from "@/components/confPage/ConfChat/ConfChat"
 // import { debounce } from "lodash"
+
+enum Tab {
+  Active = 0,
+  Planned = 1,
+  Past = 2,
+}
 
 interface IListOfConferences {
   activeTab: number
@@ -46,9 +53,16 @@ const confContainer: React.FC<IListOfConferences> = observer(
     )
 
     const getConferences = () => {
-      if (activeTab === 0) return activeConf
-      if (activeTab === 1) return plannedConf
-      return pastConf
+      switch (activeTab) {
+        case Tab.Active:
+          return activeConf
+        case Tab.Planned:
+          return plannedConf
+        case Tab.Past:
+          return pastConf
+        default:
+          return []
+      }
     }
 
     return (
@@ -56,15 +70,13 @@ const confContainer: React.FC<IListOfConferences> = observer(
         <div className={styles.scrollContainer} onScroll={handleScroll}>
           <div className={styles.allChats}>
             {getConferences().map((conf) => (
-              <div key={conf.id}>
-                <div className={styles.oneChat}>
-                  <ConfItem
-                    title={conf.title}
-                    date={conf.date}
-                    photo_url={conf.photo_url}
-                  ></ConfItem>
-                </div>
-              </div>
+              <Fragment key={conf.id}>
+                <ConfChat
+                  title={conf.title}
+                  date={conf.date}
+                  photo_url={conf.photo_url}
+                />
+              </Fragment>
             ))}
           </div>
         </div>

@@ -1,12 +1,8 @@
 import React from "react"
 import * as styles from "./ConfItem.module.scss"
+import { IOneChatOnSidebar } from "@/core/models"
 
-interface OneChatOnLeftPanel {
-  title: string
-  date: string
-  photo_url: string
-}
-export const ConfItem: React.FC<OneChatOnLeftPanel> = ({
+export const ConfItem: React.FC<IOneChatOnSidebar> = ({
   title,
   date,
   photo_url,

@@ -1,45 +1,31 @@
 import * as styles from "./TodoNotification.module.scss"
 import React from "react"
-
-export interface TodoNotificationProps {
+import {
+  getIconForNotificationType,
+  INotificationType,
+} from "@/core/constants/Notifications/NotificationsTypes"
+import NotificationItem from "@/core/constants/Notifications/NotificationItem"
+export interface ITodoNotificationProps {
   id: string
   setActive: () => void
-  childrenContent: React.ReactNode | undefined
-  childrenTitle: React.ReactNode
-  catType: CatType
+  childrenContent: string | undefined
+  childrenTitle: string
+  type: INotificationType
 }
 
-export enum CatType {
-  happy,
-  sad,
-}
-
-function getPathFromCatType(catType: CatType): string {
-  switch (catType) {
-    case CatType.happy:
-      return "/images/cat-happy.png"
-      break
-    case CatType.sad:
-      return "/images/cat-sad.png"
-      break
-  }
-}
-const TodoNotification: React.FC<TodoNotificationProps> = ({
+const TodoNotification: React.FC<ITodoNotificationProps> = ({
   childrenContent,
   childrenTitle,
-  catType,
+  type,
 }) => {
-  return (
-    <div className={styles.modal}>
-      <img className={styles.img} src={getPathFromCatType(catType)} />
+  const icon = getIconForNotificationType(type)
 
-      <div className={styles.rainbowBorder}>
-        <div className={styles.modal_content}>
-          <div className={styles.title}>{childrenTitle}</div>
-          <div className={styles.textContent}>{childrenContent}</div>
-        </div>
-      </div>
-    </div>
+  return (
+    <NotificationItem
+      childrenTitle={childrenTitle}
+      childrenContent={childrenContent}
+      imgType={icon}
+    />
   )
 }
 

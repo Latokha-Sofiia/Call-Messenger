@@ -1,10 +1,10 @@
 import { IApiClient, ApiClient } from "../../ApiClient"
 import { TodoController } from "./TodoController"
 import {
-  Todo,
   TodosStore,
   todosStore as defaultTodosStore,
 } from "../../store/TodoStore/TodoStore"
+import { ITodo } from "@/core/models"
 
 export class TodoControllerImpl implements TodoController {
   private nextTag: string | undefined = undefined
@@ -16,12 +16,12 @@ export class TodoControllerImpl implements TodoController {
 
   async fetchTodos(pageSize: number = 30) {
     try {
-      const response = await this.apiClient.get<{ todos: Todo[]; tag: string }>(
-        "/todos",
-        {
-          params: {},
-        }
-      )
+      const response = await this.apiClient.get<{
+        todos: ITodo[]
+        tag: string
+      }>("/todos", {
+        params: {},
+      })
       response.data.todos.forEach((todo) => this.todosStore.updateTodo(todo))
       this.nextTag = response.data.tag
     } catch (error) {
@@ -32,12 +32,12 @@ export class TodoControllerImpl implements TodoController {
     if (!this.nextTag) return
     try {
       console.log("todo пагинация")
-      const response = await this.apiClient.get<{ todos: Todo[]; tag: string }>(
-        "/todos",
-        {
-          params: { pageSize, tag: this.nextTag },
-        }
-      )
+      const response = await this.apiClient.get<{
+        todos: ITodo[]
+        tag: string
+      }>("/todos", {
+        params: { pageSize, tag: this.nextTag },
+      })
       this.todosStore.loadMoreTodos(response.data.todos)
       this.nextTag = response.data.tag
     } catch (error) {
@@ -48,8 +48,8 @@ export class TodoControllerImpl implements TodoController {
   async addTodo(title: string) {
     try {
       if (title.trim() !== "") {
-        const response = await this.apiClient.post<Todo[]>("/todos", { title })
-        const newTodos: Todo[] = response.data
+        const response = await this.apiClient.post<ITodo[]>("/todos", { title })
+        const newTodos: ITodo[] = response.data
         this.todosStore.addTodos(newTodos)
       }
     } catch (error) {

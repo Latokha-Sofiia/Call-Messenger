@@ -295,7 +295,7 @@ def create_todos():
         'title': request.json['title'],
         'completed': False
     }
-    todos.append(new_todo)
+    todos.insert(0, new_todo)
 
     response = jsonify([new_todo])
     return response
