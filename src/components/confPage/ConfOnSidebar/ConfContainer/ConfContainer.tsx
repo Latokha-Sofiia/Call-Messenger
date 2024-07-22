@@ -1,10 +1,12 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react"
 import * as styles from "./ConfContainer.module.scss"
-import ConfItem from "../../confPage/ConfItem/ConfItem"
 import { observer } from "mobx-react-lite"
 import { conferencesController } from "@/core/controllers/ConferencesController/ConferencesControllerImpl"
-import { conferencesStore } from "@/core/store/ConferencesStore/ConferencesStore"
-import ConfChat from "@/components/confPage/ConfChat/ConfChat"
+import {
+  Conference,
+  conferencesStore,
+} from "@/core/store/ConferencesStore/ConferencesStore"
+import ConfChat from "@/components/confPage/ConfOnSidebar/ConfChat/ConfChat"
 // import { debounce } from "lodash"
 
 enum Tab {
@@ -15,10 +17,11 @@ enum Tab {
 
 interface IListOfConferences {
   activeTab: number
+  onSelectConference: (conference: Conference) => void
 }
 
 const confContainer: React.FC<IListOfConferences> = observer(
-  ({ activeTab }) => {
+  ({ activeTab, onSelectConference }) => {
     useEffect(() => {
       conferencesController.fetchConferences()
     }, [])
@@ -75,6 +78,7 @@ const confContainer: React.FC<IListOfConferences> = observer(
                   title={conf.title}
                   date={conf.date}
                   photo_url={conf.photo_url}
+                  onClick={() => onSelectConference(conf)}
                 />
               </Fragment>
             ))}

@@ -16,7 +16,7 @@ export interface Conference {
 export interface ConferencesStore {
   conferences: Conference[]
   addConferences(conferences: Conference[]): void
-  loddMoreConferences(conferences: Conference[]): void
+  lodMoreConferences(conferences: Conference[]): void
   updateConferences(updateConference: Conference): void
   removeConference(id: string): void
   cleanConferences(): void
@@ -35,7 +35,7 @@ export class ConferencesStoreImpl implements ConferencesStore {
     this.conferences = [...this.conferences, ...newConf]
   }
 
-  loddMoreConferences(newConferences: Conference[]) {
+  lodMoreConferences(newConferences: Conference[]) {
     const existingConfIds = this.conferences.map((conf) => conf.id)
     const newConf = newConferences.filter(
       (conf) => !existingConfIds.includes(conf.id)
