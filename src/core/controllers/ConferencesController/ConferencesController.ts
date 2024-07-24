@@ -2,6 +2,7 @@ export interface ConferencesController {
   fetchConferences(): Promise<void>
   addConferences(
     title: string,
+    date: string,
     organizer: string,
     responsible: string,
     participants: string[],

@@ -1,8 +1,10 @@
 import React, { useState } from "react"
-import ChatSidebar from "../../components/sidebar/ChatSidebar/ChatSidebar"
-import ConfContentPage from "@/components/confPage/ConfMainContent/ConfContantPage/ConfContentPage"
+import Sidebar from "../../components/sidebar/Sidebar/Sidebar"
+import ConfContentPage from "@/components/conferencePage/ConferenceInfoPanel/ConfContentPage"
 import * as styles from "./ConferencesPage.module.scss"
 import { Conference } from "@/core/store/ConferencesStore/ConferencesStore"
+import NotificationList from "@/core/constants/TodoNotification/NotificationList"
+
 const ConferencesPage = () => {
   const tabsItems: string[] = ["Активные", "Запланированные", "Прошедшие"]
   const buttonText: string = "Создать конференцию"
@@ -12,15 +14,16 @@ const ConferencesPage = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.sidebar}>
-        <ChatSidebar
+        <Sidebar
           buttonText={buttonText}
           tabsItems={tabsItems}
           onSelectConference={setSelectedConference}
-        ></ChatSidebar>
+        />
       </div>
       <div className={styles.content}>
-        <ConfContentPage conference={selectedConference}></ConfContentPage>
+        <ConfContentPage conference={selectedConference} />
       </div>
+      <NotificationList />
     </div>
   )
 }

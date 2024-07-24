@@ -1,13 +1,13 @@
-import React, { Fragment, useCallback, useEffect, useState } from "react"
-import * as styles from "./ConfContainer.module.scss"
+import React, { useCallback, useEffect, useState } from "react"
+import * as styles from "./ConferencesContainer.module.scss"
 import { observer } from "mobx-react-lite"
 import { conferencesController } from "@/core/controllers/ConferencesController/ConferencesControllerImpl"
 import {
   Conference,
   conferencesStore,
 } from "@/core/store/ConferencesStore/ConferencesStore"
-import ConfChat from "@/components/confPage/ConfOnSidebar/ConfChat/ConfChat"
-// import { debounce } from "lodash"
+import Chat from "@/components/shared/Chat/Chat"
+import useScrollBottomOffset from "@/core/hooks/useScrollBottomOffset"
 
 enum Tab {
   Active = 0,
@@ -18,15 +18,17 @@ enum Tab {
 interface IListOfConferences {
   activeTab: number
   onSelectConference: (conference: Conference) => void
+  conferences: Conference[]
 }
 
-const confContainer: React.FC<IListOfConferences> = observer(
-  ({ activeTab, onSelectConference }) => {
+const ConferencesContainer: React.FC<IListOfConferences> = observer(
+  ({ activeTab, onSelectConference, conferences }) => {
     useEffect(() => {
       conferencesController.fetchConferences()
     }, [])
 
     const [modalActive, setModalActive] = useState(false)
+
     const activeConf = conferencesStore.conferences.filter(
       (conf) => conf.status === "active"
     )
@@ -42,18 +44,11 @@ const confContainer: React.FC<IListOfConferences> = observer(
       setModalActive(true)
     }
 
-    const handleScroll = useCallback(
-      // debounce(
-      (event: React.UIEvent<HTMLDivElement>) => {
-        console.log("handleScroll Conf")
-        const { scrollTop, scrollHeight, clientHeight } = event.currentTarget
-        if (scrollHeight - scrollTop - clientHeight <= 0) {
-          conferencesController.loadMoreConferences()
-        }
-      },
-      // 300),
-      []
-    )
+    const loadMoreConferences = useCallback(() => {
+      conferencesController.loadMoreConferences()
+    }, [])
+
+    const scrollRef = useScrollBottomOffset(loadMoreConferences, 300) // 300 мс debounce
 
     const getConferences = () => {
       switch (activeTab) {
@@ -70,23 +65,20 @@ const confContainer: React.FC<IListOfConferences> = observer(
 
     return (
       <div className={styles.wrapper}>
-        <div className={styles.scrollContainer} onScroll={handleScroll}>
-          <div className={styles.allChats}>
-            {getConferences().map((conf) => (
-              <Fragment key={conf.id}>
-                <ConfChat
-                  title={conf.title}
-                  date={conf.date}
-                  photo_url={conf.photo_url}
-                  onClick={() => onSelectConference(conf)}
-                />
-              </Fragment>
-            ))}
-          </div>
+        <div className={styles.allChats} ref={scrollRef}>
+          {getConferences().map((conf) => (
+            <Chat
+              key={conf.id}
+              title={conf.title}
+              date={conf.date}
+              photo_url={conf.photo_url}
+              onClick={() => onSelectConference(conf)}
+            />
+          ))}
         </div>
       </div>
     )
   }
 )
 
-export default confContainer
+export default ConferencesContainer

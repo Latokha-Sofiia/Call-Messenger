@@ -1,5 +1,5 @@
 import React from "react"
-import ChatSidebar from "../../components/sidebar/ChatSidebar/ChatSidebar"
+// import ChatSidebar from "../../components/sidebar/ChatSidebar/ChatSidebar"
 
 const CallsPage = () => {
   const tabsItems = ["Все звонки", "Пропущенные"]

@@ -1,9 +1,10 @@
-import { Todo, TodosStore, TodosStoreImpl } from "./TodoStore"
+import { TodosStore, TodosStoreImpl } from "./TodoStore"
+import { ITodo } from "@/core/models"
 
-function createTodos(): Todo[] {
+function createTodos(): ITodo[] {
   return [
     { id: "1", title: "TodoStore 1", completed: true },
-    { id: "2", title: "TodoStore 2", completed: false }
+    { id: "2", title: "TodoStore 2", completed: false },
   ]
 }
 
@@ -30,7 +31,7 @@ describe("TodoStore", () => {
     })
 
     it("should update the existing todo", () => {
-      const updatedTodo: Todo = {
+      const updatedTodo: ITodo = {
         id: "1",
         title: "updateTodo",
         completed: false,
@@ -42,7 +43,7 @@ describe("TodoStore", () => {
     })
 
     it("should add a new todo if the given id doesn't exist", () => {
-      const updatedTodo: Todo = {
+      const updatedTodo: ITodo = {
         id: "3",
         title: "updateTodo",
         completed: false,

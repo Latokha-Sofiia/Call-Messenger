@@ -2,6 +2,7 @@ import { ConferencesController } from "./ConferencesController"
 import { ApiClient, IApiClient } from "../../ApiClient"
 import {
   Conference,
+  conferencesStore,
   ConferencesStore,
   conferencesStore as defaultConferencesStore,
 } from "../../store/ConferencesStore/ConferencesStore"
@@ -22,32 +23,16 @@ export class ConferencesControllerImpl implements ConferencesController {
         params: { pageSize },
       })
       this.conferencesStore.cleanConferences()
-      this.conferencesStore.addConferences(response.data.conferences)
+      this.conferencesStore.loadConferences(response.data.conferences)
       this.nextTag = response.data.tag
     } catch (error) {
       console.error("Error fetching ConferencesPage", error)
     }
   }
 
-  async loadMoreConferences(pageSize: number = 60) {
-    if (!this.nextTag) return
-    try {
-      console.log("Conf пагинация")
-      const response = await this.apiClient.get<{
-        conferences: Conference[]
-        tag: string
-      }>("/conferences", {
-        params: { pageSize, tag: this.nextTag },
-      })
-      this.conferencesStore.loddMoreConferences(response.data.conferences)
-      this.nextTag = response.data.tag
-    } catch (error) {
-      console.log("Error loading more ConferencesPage", error)
-    }
-  }
-
   async addConferences(
     title: string,
+    date: string,
     organizer: string,
     responsible: string,
     participants: string[],
@@ -56,8 +41,9 @@ export class ConferencesControllerImpl implements ConferencesController {
     photo_url: string
   ) {
     try {
-      const response = await this.apiClient.post<Conference[]>("/conferences", {
+      const response = await this.apiClient.post<Conference>("/conferences", {
         title,
+        date,
         organizer,
         responsible,
         participants,
@@ -65,10 +51,26 @@ export class ConferencesControllerImpl implements ConferencesController {
         description,
         photo_url,
       })
-      const newConferences: Conference[] = response.data
-      this.conferencesStore.addConferences(newConferences)
+      const newConference: Conference = response.data
+      this.conferencesStore.addConferences([newConference])
     } catch (error) {
       console.log("Error adding ConferencesPage:", error)
+    }
+  }
+
+  async loadMoreConferences(pageSize: number = 60) {
+    if (!this.nextTag) return
+    try {
+      const response = await this.apiClient.get<{
+        conferences: Conference[]
+        tag: string
+      }>("/conferences", {
+        params: { pageSize, tag: this.nextTag },
+      })
+      this.conferencesStore.lodMoreConferences(response.data.conferences)
+      this.nextTag = response.data.tag
+    } catch (error) {
+      console.log("Error loading more ConferencesPage", error)
     }
   }
 
@@ -79,6 +81,10 @@ export class ConferencesControllerImpl implements ConferencesController {
     } catch (error) {
       console.log("Error removing ConferencesPage:", error)
     }
+  }
+
+  getConferences(): Conference[] {
+    return this.conferencesStore.conferences
   }
 }
 

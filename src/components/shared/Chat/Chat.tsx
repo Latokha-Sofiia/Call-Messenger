@@ -1,5 +1,5 @@
-import * as styles from "./ConfChat.module.scss"
-import ConfItem from "@/components/confPage/ConfOnSidebar/ConfItem/ConfItem"
+import * as styles from "./Chat.module.scss"
+import ConfItem from "@/components/shared/ChatItem/ConfItem"
 import React from "react"
 import { IOneChatOnSidebar } from "@/core/models"
 
@@ -7,7 +7,7 @@ interface IConfChatProps extends IOneChatOnSidebar {
   onClick: () => void
 }
 
-const ConfChat: React.FC<IConfChatProps> = ({
+const Chat: React.FC<IConfChatProps> = ({
   title,
   date,
   photo_url,
@@ -19,4 +19,4 @@ const ConfChat: React.FC<IConfChatProps> = ({
     </div>
   )
 }
-export default ConfChat
+export default Chat

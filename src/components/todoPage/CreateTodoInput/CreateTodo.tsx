@@ -28,7 +28,6 @@ export default function CreateTodo() {
       <div onClick={onClickAddTodo} className={styles.addTodo}>
         +
       </div>
-
       <NotificationList />
     </div>
   )

@@ -1,12 +1,12 @@
 import React, { useState } from "react"
-import * as styles from "./TabsOnChatSidebar.module.scss"
+import * as styles from "./TabsContainer.module.scss"
 
 export interface ITabsOnTheLeftPanel {
   tabsItems: string[]
   onTabClick: (index: number) => void
 }
 
-export const TabsOnChatSidebar: React.FC<ITabsOnTheLeftPanel> = ({
+export const TabsContainer: React.FC<ITabsOnTheLeftPanel> = ({
   tabsItems,
   onTabClick,
 }) => {
@@ -32,4 +32,4 @@ export const TabsOnChatSidebar: React.FC<ITabsOnTheLeftPanel> = ({
   )
 }
 
-export default TabsOnChatSidebar
+export default TabsContainer
