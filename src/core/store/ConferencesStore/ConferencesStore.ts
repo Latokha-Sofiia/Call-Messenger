@@ -1,4 +1,6 @@
 import { makeAutoObservable } from "mobx"
+import { notificationController } from "@/core/controllers/NotificationController/NotificationController"
+import { INotificationType } from "@/core/constants/Notifications/NotificationsTypes"
 
 export interface Conference {
   id: string
@@ -11,12 +13,14 @@ export interface Conference {
   location: string
   description: string
   photo_url: string
+  icon?: string
 }
 
 export interface ConferencesStore {
   conferences: Conference[]
   addConferences(conferences: Conference[]): void
-  loddMoreConferences(conferences: Conference[]): void
+  loadConferences(conferences: Conference[]): void
+  lodMoreConferences(conferences: Conference[]): void
   updateConferences(updateConference: Conference): void
   removeConference(id: string): void
   cleanConferences(): void
@@ -27,15 +31,21 @@ export class ConferencesStoreImpl implements ConferencesStore {
   constructor() {
     makeAutoObservable(this)
   }
-  addConferences(newConferences: Conference[]) {
-    const existingConfIds = this.conferences.map((conf) => conf.id)
-    const newConf = newConferences.filter(
-      (conf) => !existingConfIds.includes(conf.id)
+
+  loadConferences(newConference: Conference[]) {
+    this.conferences = [...this.conferences, ...newConference]
+  }
+  addConferences(newConference: Conference[]) {
+    this.conferences = [...this.conferences, ...newConference]
+    notificationController.showNotification(
+      "Добавлена конференция:",
+      INotificationType.Added,
+      newConference[0].title,
+      () => {}
     )
-    this.conferences = [...this.conferences, ...newConf]
   }
 
-  loddMoreConferences(newConferences: Conference[]) {
+  lodMoreConferences(newConferences: Conference[]) {
     const existingConfIds = this.conferences.map((conf) => conf.id)
     const newConf = newConferences.filter(
       (conf) => !existingConfIds.includes(conf.id)

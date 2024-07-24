@@ -24,6 +24,7 @@ const NotCompletedTodos: React.FC<ITodoListProps> = ({
           >
             Delete
           </button>
+
           <input
             className={styles.checkboxComplete}
             type="checkbox"

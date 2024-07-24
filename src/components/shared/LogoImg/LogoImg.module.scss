@@ -1,0 +1,23 @@
+.icon {
+  position: relative;
+  left: -35px;
+  bottom: -35px;
+  width: 35px;
+  height: 35px;
+}
+
+.photoConferenceGroup {
+  border-radius: 48px;
+  width: 100px;
+  height: 100px;
+  flex-shrink: 0;
+  display: flex;
+}
+
+.conferenceLogo {
+  margin: 0 30px 10px 0;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  height: 100px;
+}

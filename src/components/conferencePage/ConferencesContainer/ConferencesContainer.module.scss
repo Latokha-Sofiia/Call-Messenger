@@ -5,12 +5,9 @@
   padding: 0 16px;
 }
 
-.scrollContainer {
+.allChats {
   overflow-y: auto;
   overflow-x: hidden;
-}
-
-.allChats {
   display: flex;
   flex-wrap: wrap;
   user-select: none;

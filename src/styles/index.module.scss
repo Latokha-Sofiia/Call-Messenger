@@ -19,6 +19,17 @@ body {
   --transparent-blue: #312b46;
   --gray-text: #9298a0;
 
+  --red-randow-background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff2f00,
+    #ff6200,
+    #ff9100,
+    #ff6200,
+    #ff2f00,
+    #ff0000
+  );
+
   --rainbow-background: linear-gradient(
     45deg,
     #ff0000,

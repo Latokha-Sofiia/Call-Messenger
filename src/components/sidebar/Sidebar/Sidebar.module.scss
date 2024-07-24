@@ -1,7 +1,9 @@
 .rainbowFrame {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  position: fixed;
   width: 371px;
-  min-height: 100vh;
-  height: max-content;
+  height: 100%;
   background: var(--rainbow-background);
   background-size: 400%;
   animation: glowing 20s linear infinite;
@@ -17,15 +19,12 @@
   background: var(--light-blue);
 }
 
-
-
 .fixedPosition {
   position: fixed;
   background-color: var(--light-blue);
   width: 355px;
   z-index: 20;
 }
-
 
 .CreateConferenceButton {
   user-select: none;
