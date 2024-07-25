@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from "react"
+import { useEffect, useRef, useMemo } from "react"
 import { debounce } from "lodash"
 
 type ScrollCallback = (event: Event) => void
@@ -9,21 +9,20 @@ const useScrollBottomOffset = (
 ) => {
   const containerRef = useRef<HTMLDivElement>(null)
 
-  const handleScroll = useCallback(
-    debounce((event: Event) => {
+  const myDebouncedCallback = useMemo(() => {
+    return debounce((event: Event) => {
       const target = event.target as HTMLDivElement
       const { scrollTop, scrollHeight, clientHeight } = target
       if (scrollHeight - scrollTop - clientHeight <= 0) {
         callback(event)
       }
-    }, debounceDelay),
-    [callback, debounceDelay]
-  )
+    }, debounceDelay)
+  }, [callback, debounceDelay])
 
   useEffect(() => {
     const container = containerRef.current
     if (container) {
-      const handleScrollEvent = (event: Event) => handleScroll(event)
+      const handleScrollEvent = (event: Event) => myDebouncedCallback(event)
       container.addEventListener("scroll", handleScrollEvent as EventListener)
 
       return () => {
@@ -33,7 +32,7 @@ const useScrollBottomOffset = (
         )
       }
     }
-  }, [handleScroll])
+  }, [myDebouncedCallback])
 
   return containerRef
 }
