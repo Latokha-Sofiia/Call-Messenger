@@ -1,12 +1,17 @@
 import React from "react"
 import * as styles from "./InfoBlock.module.scss"
 import { Conference } from "@/core/store/ConferencesStore/ConferencesStore"
+import Tooltip from "@/core/constants/Tooltip/Tooltip"
 
 interface IConfContentPageProps {
   conference: Conference | null
 }
 
 const InfoBlock: React.FC<IConfContentPageProps> = ({ conference }) => {
+  if (!conference) {
+    return null
+  }
+
   const infoItems = [
     { name: "Организатор", value: conference.organizer },
     { name: "Ответственный", value: conference.responsible },
@@ -27,7 +32,21 @@ const InfoBlock: React.FC<IConfContentPageProps> = ({ conference }) => {
         {infoItems.map((item, index) => (
           <div key={index} className={styles.oneInfoBlock}>
             <div className={styles.infoName}>{item.name}</div>
-            <div className={styles.infoData}>{item.value}</div>
+            {item.name === "Участники" ? (
+              <Tooltip
+                content={
+                  <div>
+                    {conference.participants.map((participant, idx) => (
+                      <div key={idx}>{participant}</div>
+                    ))}
+                  </div>
+                }
+              >
+                <div className={styles.infoDataParticipants}>{item.value}</div>
+              </Tooltip>
+            ) : (
+              <div className={styles.infoData}>{item.value}</div>
+            )}
           </div>
         ))}
       </div>

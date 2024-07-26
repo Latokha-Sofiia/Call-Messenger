@@ -5,6 +5,7 @@
     "packages/*"
   ],
   "dependencies": {
+    "@floating-ui/react": "^0.26.20",
     "@types/mocha": "^10.0.7",
     "axios": "^1.7.2",
     "date-fns": "^3.6.0",
