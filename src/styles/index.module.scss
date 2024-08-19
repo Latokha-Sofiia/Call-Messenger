@@ -6,6 +6,7 @@
 
 body {
   margin: 0;
+  overflow-y: hidden;
 }
 
 ::-webkit-scrollbar {
@@ -15,7 +16,8 @@ body {
 :root {
   --navy-blue: #1d1932;
   --light-blue: #231d3b;
-  --button-blue: #3b5683;
+  --button-blue: #3B5683;
+  --button-green: #14bbb5;
   --transparent-blue: #312b46;
   --gray-text: #9298a0;
 

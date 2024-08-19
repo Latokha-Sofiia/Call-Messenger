@@ -1,14 +1,15 @@
 .wrapper {
   padding: 20px;
   width: 72px;
-  min-height: 100vh;
   background: var(--light-blue);
   user-select: none;
   height: 100%;
   position: fixed;
+  overflow-y: hidden;
 }
 
 .rainbowFrame {
+  overflow-y: hidden;
   width: 73px;
   background: var(--rainbow-background);
   background-size: 400%;
@@ -38,6 +39,12 @@
   width: 25px;
   height: 25px;
   padding-left: 3.5px;
+}
+
+.auth{
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
 }
 
 .list {

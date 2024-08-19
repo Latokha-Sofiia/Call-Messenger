@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import Sidebar from "../../components/sidebar/Sidebar/Sidebar"
-import ConfContentPage from "@/components/conferencePage/ConferenceInfoPanel/ConfContentPage"
+import ConferenceInfoPanel from "@/components/conferencePage/ConferenceInfoPanel/ConferenceInfoPanel"
 import * as styles from "./ConferencesPage.module.scss"
 import { Conference } from "@/core/store/ConferencesStore/ConferencesStore"
 import NotificationList from "@/core/constants/TodoNotification/NotificationList"
@@ -21,7 +21,7 @@ const ConferencesPage = () => {
         />
       </div>
       <div className={styles.content}>
-        <ConfContentPage conference={selectedConference} />
+        <ConferenceInfoPanel conference={selectedConference} />
       </div>
       <NotificationList />
     </div>

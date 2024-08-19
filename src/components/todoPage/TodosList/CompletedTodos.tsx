@@ -26,12 +26,13 @@ const CompletedTodos: React.FC<ITodoListProps> = ({
             >
               Delete
             </button>
-            <input
+
+            <button
               className={styles.checkboxComplete}
-              type="checkbox"
-              checked={todo.completed}
-              onChange={() => onComplete(todo.id)}
-            />
+              onClick={() => onComplete(todo.id)}
+            >
+              ✓
+            </button>
             <div className={styles.titleTodo}>{todo.title}</div>
           </div>
         ))}

@@ -2,7 +2,7 @@
   border-radius: 8px;
   background: var(--transparent-blue);
   display: flex;
-  height: 32px;
+  height: 35px;
   margin: 8px 0 8px 16px;
   align-items: center;
 }
@@ -11,7 +11,8 @@
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 8px;
+  //padding: 8px;
+  padding: 15px 8px 8px 15px;
 }
 
 .searchLogo {
@@ -19,17 +20,22 @@
   height: 13px;
   flex-shrink: 0;
   user-select: none;
-  margin-right: 36px;
+  margin-right: 30px;
+  margin-bottom: 7px;
 }
 
 .searchInput {
   color: #9298a0;
   font-family: Roboto, serif;
-  font-size: 14px;
   user-select: none;
-  border: none;
   background-color: transparent;
-  outline: none;
-  padding: 5px;
   width: 300px;
+
+  border-bottom: none !important;
+  box-shadow: none !important;
+
+  &::after {
+    border-bottom: none !important;
+    box-shadow: none !important;
+  }
 }

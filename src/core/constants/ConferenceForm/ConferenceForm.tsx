@@ -49,6 +49,7 @@ const ConferenceForm: React.FC<IConferenceFormProps> = ({
             className={getInputClassName(title)}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            type="login"
           />
         </div>
 
@@ -58,6 +59,7 @@ const ConferenceForm: React.FC<IConferenceFormProps> = ({
             className={getInputClassName(date)}
             value={date}
             onChange={(e) => setDate(e.target.value)}
+            type="login"
           />
         </div>
 
@@ -67,6 +69,7 @@ const ConferenceForm: React.FC<IConferenceFormProps> = ({
             className={getInputClassName(organizer)}
             value={organizer}
             onChange={(e) => setOrganizer(e.target.value)}
+            type="login"
           />
         </div>
 
@@ -76,6 +79,7 @@ const ConferenceForm: React.FC<IConferenceFormProps> = ({
             className={styles.inputItem}
             value={responsible}
             onChange={(e) => setResponsible(e.target.value)}
+            type="login"
           />
         </div>
 
@@ -85,6 +89,7 @@ const ConferenceForm: React.FC<IConferenceFormProps> = ({
             className={styles.inputItem}
             value={participants}
             onChange={(e) => setParticipants(e.target.value)}
+            type="login"
           />
         </div>
 
@@ -94,6 +99,7 @@ const ConferenceForm: React.FC<IConferenceFormProps> = ({
             className={styles.inputItem}
             value={location}
             onChange={(e) => setLocation(e.target.value)}
+            type="login"
           />
         </div>
 
@@ -103,6 +109,7 @@ const ConferenceForm: React.FC<IConferenceFormProps> = ({
             className={styles.inputItem}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            type="login"
           />
         </div>
 
@@ -112,6 +119,7 @@ const ConferenceForm: React.FC<IConferenceFormProps> = ({
             className={styles.inputItem}
             value={photo_url}
             onChange={(e) => setPhotoUrl(e.target.value)}
+            type="login"
           />
         </div>
 

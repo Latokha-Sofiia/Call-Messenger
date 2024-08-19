@@ -1,9 +1,9 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import * as styles from "./CreateTodo.module.scss"
 import { todoController } from "@/core/controllers/TodoController/TodoControllerImpl"
 import NotificationList from "@/core/constants/TodoNotification/NotificationList"
 
-export default function CreateTodo() {
+const CreateTodo: React.FC = () => {
   const [inputValue, setInputValue] = useState("")
 
   const onInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,3 +32,5 @@ export default function CreateTodo() {
     </div>
   )
 }
+
+export default CreateTodo

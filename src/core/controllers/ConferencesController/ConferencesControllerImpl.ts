@@ -19,7 +19,7 @@ export class ConferencesControllerImpl implements ConferencesController {
       const response = await this.apiClient.get<{
         conferences: Conference[]
         tag: string
-      }>("/conferences", {
+      }>("/api/conferences", {
         params: { pageSize },
       })
       this.conferencesStore.cleanConferences()
@@ -41,16 +41,19 @@ export class ConferencesControllerImpl implements ConferencesController {
     photo_url: string
   ) {
     try {
-      const response = await this.apiClient.post<Conference>("/conferences", {
-        title,
-        date,
-        organizer,
-        responsible,
-        participants,
-        location,
-        description,
-        photo_url,
-      })
+      const response = await this.apiClient.post<Conference>(
+        "/api/conferences/create",
+        {
+          title,
+          date,
+          organizer,
+          responsible,
+          participants,
+          location,
+          description,
+          photo_url,
+        }
+      )
       const newConference: Conference = response.data
       this.conferencesStore.addConferences([newConference])
     } catch (error) {
@@ -64,7 +67,7 @@ export class ConferencesControllerImpl implements ConferencesController {
       const response = await this.apiClient.get<{
         conferences: Conference[]
         tag: string
-      }>("/conferences", {
+      }>("/api/conferences", {
         params: { pageSize, tag: this.nextTag },
       })
       this.conferencesStore.lodMoreConferences(response.data.conferences)
@@ -76,7 +79,7 @@ export class ConferencesControllerImpl implements ConferencesController {
 
   async removeConferences(id: string) {
     try {
-      await this.apiClient.delete(`/conferences?id=${id}`)
+      await this.apiClient.delete(`/api/conferences?id=${id}`)
       this.conferencesStore.removeConference(id)
     } catch (error) {
       console.log("Error removing ConferencesPage:", error)
@@ -88,5 +91,5 @@ export class ConferencesControllerImpl implements ConferencesController {
   }
 }
 
-const apiClient = new ApiClient({ baseUrl: "http://localhost", port: 5001 })
+const apiClient = new ApiClient({ baseUrl: "http://localhost", port: 5000 })
 export const conferencesController = new ConferencesControllerImpl(apiClient)

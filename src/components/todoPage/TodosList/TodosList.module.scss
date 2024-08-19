@@ -20,6 +20,18 @@
   margin: 1px;
 }
 
+.editTodo {
+  color: #9298a0;
+  user-select: none;
+  border: none;
+  background-color: var(--navy-blue);
+  outline: none;
+  padding: 5px;
+  font-family: Roboto, serif;
+  font-size: 14px;
+  margin-left: 10px;
+}
+
 .listTitle {
   font-family: Roboto, serif;
   font-size: 16px;
@@ -60,6 +72,9 @@
   user-select: none;
   cursor: pointer;
   align-self: center;
+  background-color: var(--button-green);
+  border-radius: 2px;
+  border: none;
 
   &:before {
     align-content: center;
@@ -68,6 +83,12 @@
 
   &:hover:before {
     opacity: 1;
+  }
+
+  &:hover {
+    background-color: var(--button-blue);
+    font-size: 17px;
+    font-weight: 700;
   }
 }
 

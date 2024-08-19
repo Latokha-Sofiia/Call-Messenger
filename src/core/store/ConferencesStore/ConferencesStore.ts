@@ -16,6 +16,15 @@ export interface Conference {
   icon?: string
 }
 
+export interface Chat {
+  companionId: string
+  clientId: string
+  companionName: string
+  clientName: string
+  date: string
+  photoFromUserName: string
+}
+
 export interface ConferencesStore {
   conferences: Conference[]
   addConferences(conferences: Conference[]): void

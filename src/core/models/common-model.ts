@@ -7,6 +7,25 @@ export interface ITodo {
   completed: boolean
 }
 
+export interface ITodoWithName extends ITodo {
+  name: string
+}
+
+export interface IAuthResponseLogin {
+  token: string
+  userId: string
+}
+
+export interface ICheckAuthResponse {
+  isValid: boolean
+}
+
+export interface IAuthResponseRegister {
+  token: string
+  userId: string
+  name: string
+}
+
 export interface IOneChatOnSidebar {
   title: string
   date: string
