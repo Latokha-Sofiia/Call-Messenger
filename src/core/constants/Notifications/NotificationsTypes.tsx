@@ -3,6 +3,7 @@ export enum INotificationType {
   Added = "added",
   NotCompleted = "notCompleted",
   Completed = "completed",
+  Edited = "edited",
 }
 
 const iconMapping = {
@@ -10,6 +11,7 @@ const iconMapping = {
   [INotificationType.Added]: "/images/cat-happy.png",
   [INotificationType.Completed]: "/images/cat-completed.png",
   [INotificationType.NotCompleted]: "/images/cat-not-completed.png",
+  [INotificationType.Edited]: "/images/cat-happy.png",
 }
 
 export const getIconForNotificationType = (type: INotificationType): string => {

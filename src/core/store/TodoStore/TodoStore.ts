@@ -2,7 +2,9 @@ import { makeAutoObservable } from "mobx"
 import { notificationController } from "../../controllers/NotificationController/NotificationController"
 import { ITodo } from "@/core/models"
 import { INotificationType } from "@/core/constants/Notifications/NotificationsTypes"
-
+import { UserContext } from "@/core/context/UserContext"
+import { AuthContext } from "@/core/context/AuthContext"
+import { useContext } from "react"
 export interface TodosStore {
   todos: ITodo[]
   addTodos(todos: ITodo[]): void
@@ -11,6 +13,7 @@ export interface TodosStore {
   removeTodo(id: string): void
   completeTodo(id: string): void
   cleanTodos(): void
+  editTodo(id: string, newTitle: string, name: string): void
 }
 
 export class TodosStoreImpl implements TodosStore {
@@ -85,9 +88,22 @@ export class TodosStoreImpl implements TodosStore {
     }
   }
 
+  editTodo(id: string, newTitle: string, name: string) {
+    this.todos = this.todos.map((todo) =>
+      todo.id === id ? { ...todo, title: newTitle } : todo
+    )
+
+    const todoItem = this.todos.find((todo) => todo.id === id)
+    notificationController.showNotification(
+      "Todo изменено",
+      INotificationType.Edited,
+      `Пользователь ${name} изменил туду`,
+      () => {}
+    )
+  }
+
   cleanTodos() {
     this.todos = []
   }
 }
-
 export const todosStore = new TodosStoreImpl()

@@ -14,13 +14,14 @@ export const NavigationPanel = () => {
           </Link>
         </div>
         <div className={styles.list}>
-          <Link to={"/calls"} className={styles.listItem}>
-            <img src="/icons/chat.svg" />
-          </Link>
-        </div>
-        <div className={styles.list}>
           <Link to={"/conferences"} className={styles.listItem}>
             <img src="/icons/scheduled-calls.svg" />
+          </Link>
+        </div>
+
+        <div className={`${styles.auth} ${styles.list}`}>
+          <Link to={"/personal_data"} className={styles.listItem}>
+            <img src="/icons/auth.svg" />
           </Link>
         </div>
       </div>

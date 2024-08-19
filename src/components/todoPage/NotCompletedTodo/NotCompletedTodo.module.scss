@@ -1,17 +1,3 @@
-.scrollContainer {
-  height: 100vh;
-  overflow-y: auto;
-}
-
-.oneTodoList {
-  background-color: var(--light-blue);
-  width: max-content;
-  height: max-content;
-  padding: 10px 20px;
-  border-radius: 6px;
-  margin: 1px;
-}
-
 .rainbowFrame {
   border-radius: 6px;
   height: max-content;
@@ -24,11 +10,14 @@
   margin-top: 20px;
 }
 
-.allTodos {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 40px;
-  margin-bottom: 20px;
+.oneTodoList {
+  background-color: var(--light-blue);
+  width: max-content;
+  max-width: 85vw;
+  height: max-content;
+  padding: 10px 20px;
+  border-radius: 6px;
+  margin: 1px;
 }
 
 .listTitle {
@@ -40,7 +29,14 @@
   padding-bottom: 10px;
 }
 
+.mainContent {
+  display: flex;
+  padding: 4px 0;
+  user-select: none;
+}
+
 .buttonRemoveTodo {
+  align-self: center;
   height: 28px;
   font-size: 14px;
   background-color: var(--button-blue);
@@ -58,11 +54,34 @@
   }
 }
 
+.buttonEditTodo {
+  align-self: center;
+  height: 28px;
+  font-size: 14px;
+  background-color: var(--button-green);
+  color: var(--navy-blue);
+  border-radius: 6px;
+  cursor: pointer;
+  user-select: none;
+  padding: 4px 16px;
+  align-content: center;
+  border: none;
+  margin-right: 10px;
+
+  &:hover {
+    color: white;
+  }
+}
+
 .checkboxComplete {
   width: 21px;
+  height: 21px;
   user-select: none;
   cursor: pointer;
-
+  align-self: center;
+  border: none;
+  border-radius: 2px;
+  margin-right: 15px;
   &:before {
     align-content: center;
     height: 12.6px;
@@ -71,22 +90,39 @@
   &:hover:before {
     opacity: 1;
   }
+
+  &:hover {
+    background-color: var(--button-green);
+    border: none;
+    border-radius: 2px;
+  }
 }
 
 .titleTodo {
   user-select: none;
+  align-self: center;
   color: white;
   display: flex;
   flex-wrap: wrap;
-  padding-left: 10px;
   align-content: center;
+  max-width: 50vw;
+
+  -webkit-line-clamp: 3;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-.mainContent {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 4px 0;
+.editTodo {
+  color: #9298a0;
   user-select: none;
+  border: none;
+  background-color: var(--navy-blue);
+  outline: none;
+  padding: 5px;
+  font-family: Roboto, serif;
+  font-size: 14px;
+  margin-left: 10px;
 }
 
 @keyframes glowing {

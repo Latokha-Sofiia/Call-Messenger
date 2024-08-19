@@ -1,42 +1,39 @@
-import React from "react"
+import React, { useState } from "react"
 import * as styles from "./TodosList.module.scss"
 import { ITodo } from "@/core/models"
+import NotCompletedTodo from "@/components/todoPage/NotCompletedTodo/NotCompletedTodo"
+import { websocketController } from "@/core/controllers/WebsocketController/WebsocketController"
+import any = jasmine.any
 
 interface ITodoListProps {
   todos: ITodo[]
   onRemove: (id: string) => void
   onComplete: (id: string) => void
+  onEdit: (id: string, newTitle: string) => void
 }
 
 const NotCompletedTodos: React.FC<ITodoListProps> = ({
   todos,
   onRemove,
+  onEdit,
   onComplete,
-}) => (
-  <div className={styles.rainbowFrame}>
-    <div className={styles.oneTodoList}>
-      <div className={styles.listTitle}>Не завершенные задачи</div>
-      {todos.map((todo) => (
-        <div key={todo.id} className={styles.mainContent}>
-          <button
-            className={styles.buttonRemoveTodo}
-            onClick={() => onRemove(todo.id)}
-          >
-            Delete
-          </button>
+}) => {
+  return (
+    <div className={styles.rainbowFrame}>
+      <div className={styles.oneTodoList}>
+        <div className={styles.listTitle}>Не завершенные задачи</div>
 
-          <input
-            className={styles.checkboxComplete}
-            type="checkbox"
-            checked={todo.completed}
-            onChange={() => onComplete(todo.id)}
-          />
-
-          <div className={styles.titleTodo}>{todo.title}</div>
-        </div>
-      ))}
+        {todos.map((todo) => (
+          <NotCompletedTodo
+            todo={todo}
+            onRemove={onRemove}
+            onComplete={onComplete}
+            onEdit={onEdit}
+          ></NotCompletedTodo>
+        ))}
+      </div>
     </div>
-  </div>
-)
+  )
+}
 
 export default NotCompletedTodos

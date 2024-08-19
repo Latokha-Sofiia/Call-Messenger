@@ -1,0 +1,138 @@
+.wrapper {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  user-select: none;
+  align-content: center;
+  justify-content: center;
+}
+
+.infoWrapper {
+  padding: 8px 16px;
+  user-select: none;
+  background-color: var(--transparent-blue);
+  border-radius: 5px;
+  width: max-content;
+}
+
+.authTitle {
+  margin-left: 135px;
+  color: var(--gray-text);
+  font-size: 40px;
+  width: max-content;
+}
+
+.title {
+  color: var(--gray-text);
+  width: 100%;
+  margin-right: 30px;
+}
+
+.buttonRegistration {
+  background-color: var(--button-blue);
+  align-self: center;
+  height: 28px;
+  font-size: 14px;
+  color: var(--navy-blue);
+  border-radius: 6px;
+  cursor: pointer;
+  user-select: none;
+  padding: 4px 16px;
+  align-content: center;
+  border: none;
+  margin-right: 10px;
+
+  &:hover {
+    color: white;
+    background-color: #1c47f8;
+  }
+}
+
+.buttons {
+  width: 100%;
+  margin: 40px 0 10px 100px;
+}
+
+.buttonLogin {
+  background-color: coral;
+  align-self: center;
+  height: 28px;
+  font-size: 14px;
+  color: var(--navy-blue);
+  border-radius: 6px;
+  cursor: pointer;
+  user-select: none;
+  padding: 4px 16px;
+  align-content: center;
+  border: none;
+  margin-right: 10px;
+
+  &:hover {
+    color: white;
+    background-color: #ff651f;
+  }
+}
+
+.entryFieldItem {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+}
+
+.inputItem {
+  background-color: var(--navy-blue);
+  border-radius: 6px;
+  height: 30px;
+  border-color: transparent;
+  border-width: 1px;
+  padding: 5px 10px;
+  color: var(--gray-text);
+  outline: 0;
+  outline-offset: 0;
+  min-width: 400px;
+}
+
+.rainbowFrame {
+  background: var(--rainbow-background);
+  background-size: 400%;
+  animation: glowing 20s linear infinite;
+  transition: opacity 0.3s ease-in-out;
+  width: max-content;
+  height: max-content;
+  padding: 2px;
+  align-items: center;
+  align-content: center;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+}
+
+.photoLogo {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  user-select: none;
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+
+
+
+
+

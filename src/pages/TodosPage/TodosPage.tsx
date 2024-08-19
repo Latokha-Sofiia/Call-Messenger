@@ -4,10 +4,16 @@ import CreateTodo from "../../components/todoPage/CreateTodoInput/CreateTodo"
 import * as styles from "./TodoPage.module.scss"
 
 export default function TodosPage() {
+  const [name, setName] = useState("")
+
+  const updateName = (newName: string) => {
+    setName(newName)
+  }
+
   return (
     <div className={styles.wrapper}>
-      <CreateTodo />
-      <TodosPanel />
+      <CreateTodo updateName={updateName} />
+      <TodosPanel name={name} />
     </div>
   )
 }

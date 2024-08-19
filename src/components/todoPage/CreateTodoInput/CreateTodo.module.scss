@@ -5,11 +5,10 @@
   background: var(--light-blue);
   border-radius: 8px;
   height: 32px;
-  padding: 8px;
+  padding: 12px 8px 8px 8px;
   position: fixed;
   margin-top: 40px;
   width: 20vw;
-
 }
 
 .wrapper {
@@ -21,13 +20,36 @@
 .todoInput {
   color: #9298a0;
   user-select: none;
-  border: none;
   background-color: transparent;
-  outline: none;
   padding: 5px;
   font-family: Roboto, serif;
   font-size: 14px;
   width: 20vw;
+  border-bottom: none !important;
+  box-shadow: none !important;
+
+  &::after {
+    border-bottom: none !important;
+    box-shadow: none !important;
+  }
+}
+
+.nameInput {
+  border-bottom: #3b5683 1px solid;
+  background: var(--light-blue);
+  border-radius: 8px;
+  height: 32px;
+  padding: 8px;
+  //position: fixed;
+  //margin-top: 70px;
+  width: 200px;
+  //margin-left: 25vw;
+
+  color: #9298a0;
+  user-select: none;
+  outline: none;
+  font-family: Roboto, serif;
+  font-size: 14px;
 }
 
 

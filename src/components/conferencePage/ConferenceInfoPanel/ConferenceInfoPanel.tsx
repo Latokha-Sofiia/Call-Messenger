@@ -1,5 +1,5 @@
 import React from "react"
-import * as styles from "./ConfContentPage.module.scss"
+import * as styles from "./ConferenceInfoPanel.module.scss"
 import { Conference } from "@/core/store/ConferencesStore/ConferencesStore"
 import InfoBlock from "@/components/shared/InfoBlock/InfoBlock"
 import LogoImg from "@/components/shared/LogoImg/LogoImg"
@@ -9,7 +9,9 @@ interface IConfContentPageProps {
   conference: Conference | null
 }
 
-const ConfContentPage: React.FC<IConfContentPageProps> = ({ conference }) => {
+const ConferenceInfoPanel: React.FC<IConfContentPageProps> = ({
+  conference,
+}) => {
   if (!conference) {
     return (
       <div className={styles.wrapperForNotSelected}>
@@ -34,4 +36,4 @@ const ConfContentPage: React.FC<IConfContentPageProps> = ({ conference }) => {
   )
 }
 
-export default ConfContentPage
+export default ConferenceInfoPanel

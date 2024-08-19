@@ -10,6 +10,7 @@
     "@src/components": "*",
     "@src/pages": "*",
     "@config/build-config": "*",
+    "jsonwebtoken": "^8.5.1",
     "mobx": "^6.12.4",
     "mobx-react": "^9.1.1",
     "mobx-react-lite": "^4.0.7",
@@ -17,8 +18,8 @@
     "react-dom": "^18.3.1"
   },
   "scripts": {
-    "server": "python ../api-manager/app.py --port 5000",
     "start": "webpack serve --open",
+    "start-2": "webpack serve --open --port 3001",
     "build:dev": "webpack --env mode=development",
     "build:prod": "webpack --env mode=production",
     "build:mobile": "webpack --env mode=production --env platform=mobile",
