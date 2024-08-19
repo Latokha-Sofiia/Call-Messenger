@@ -1,6 +1,6 @@
 import TodosPage from "@/pages/TodosPage/TodosPage"
 import React from "react"
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 import ConferencesPage from "./pages/ConferencesPage/ConferencesPage"
 import AuthPage from "./pages/AuthPage/AuthPage"
 import PersonalDataPage from "@/pages/PersonalDataPage/PersonalDataPage"
@@ -14,7 +14,6 @@ export const useRoutes = (isAuthenticated: boolean | null) => {
 
   if (isAuthenticated) {
     return (
-      // <UserProvider>
       <Routes>
         <Route path="/" element={<PersonalDataPage />} />
 
@@ -26,7 +25,6 @@ export const useRoutes = (isAuthenticated: boolean | null) => {
 
         <Route path="*" element={<PersonalDataPage />} />
       </Routes>
-      // </UserProvider>
     )
   }
 

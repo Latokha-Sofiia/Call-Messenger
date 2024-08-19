@@ -22,12 +22,6 @@ function App() {
     }
 
     checkAuth()
-    const userData = async () => {
-      const response = await authController.getPersonalData()
-      setUserName(response.name)
-    }
-
-    userData()
   }, [])
 
   const routes = useRoutes(isAuthenticated)
