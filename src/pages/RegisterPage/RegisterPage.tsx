@@ -16,14 +16,7 @@ const AuthPage = () => {
 
   const registerHandler = async () => {
     try {
-      console.log(
-        "login:",
-        form.login,
-        "password:",
-        form.password,
-        "name:",
-        form.name
-      )
+      console.log(form.login, form.password, form.name)
       await authController.registerHandler(form.login, form.password, form.name)
     } catch (e) {}
   }

@@ -12,8 +12,8 @@ export default function TodosPage() {
 
   return (
     <div className={styles.wrapper}>
-      <CreateTodo updateName={updateName} />
-      <TodosPanel name={name} />
+      <CreateTodo />
+      <TodosPanel />
     </div>
   )
 }
