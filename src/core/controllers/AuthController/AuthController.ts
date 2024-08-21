@@ -25,18 +25,52 @@ class AuthController {
       name: string
       login: string
       password: string
+      surname: string
+      photo_url: string
     }>("/api/auth/personal-data", {
       withCredentials: true,
     })
 
-    console.log("response", response)
     return response.data
+    return
+  }
+
+  async updatePersonalData(data: {
+    name: string
+    surname: string
+    login: string
+    password: string
+    photo_url: string
+  }) {
+    try {
+      const response = await this.apiClient.put(
+        "/api/auth/update-personal-data",
+        data,
+        {
+          withCredentials: true,
+        }
+      )
+      return response.data
+    } catch (e) {
+      this.showNotification("Ошибка при обновлении данных")
+      return null
+    }
   }
 
   async logout() {
-    await this.apiClient.patch<IAuthResponseLogin>("/api/auth/logout", {
-      withCredentials: true,
-    })
+    try {
+      const response = await this.apiClient.get("/api/auth/logout", {
+        withCredentials: true,
+      })
+      if (response.status === 200) {
+        this.showNotification("Вы успешно вышли из системы")
+        window.location.href = "/login"
+      } else {
+        throw new Error("Ошибка при выходе из системы")
+      }
+    } catch (error) {
+      this.showNotification("Ошибка при выходе из системы")
+    }
   }
 
   async loginHandler(
@@ -46,17 +80,10 @@ class AuthController {
     try {
       const response = await this.apiClient.post<IAuthResponseLogin>(
         "/api/auth/login",
-        {
-          login,
-          password,
-        },
-        {
-          withCredentials: true,
-        }
+        { login, password },
+        { withCredentials: true }
       )
-
       this.showNotification(`Выполнен вход под логином ${login}`)
-
       return response.data
     } catch (e) {
       this.showNotification(e.response.data.message)
@@ -67,15 +94,19 @@ class AuthController {
   async registerHandler(
     name: string,
     login: string,
-    password: string
+    password: string,
+    surname: string,
+    photo_url: string
   ): Promise<IAuthResponseRegister> {
     try {
       const response = await this.apiClient.post<IAuthResponseRegister>(
         "/api/auth/register",
         {
-          name,
-          login,
-          password,
+          name: name,
+          login: login,
+          password: password,
+          surname: surname,
+          photo_url: photo_url,
         }
       )
 

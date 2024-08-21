@@ -16,6 +16,25 @@ export interface IAuthResponseLogin {
   userId: string
 }
 
+export interface IUserData {
+  name: string
+  surname: string
+  login: string
+  password: string
+  photo_url: string
+}
+
+export interface IUserDataProps {
+  onClose: () => void
+  onSubmit: (data: {
+    name: string
+    surname: string
+    login: string
+    password: string
+    photo_url: string
+  }) => void
+}
+
 export interface ICheckAuthResponse {
   isValid: boolean
 }

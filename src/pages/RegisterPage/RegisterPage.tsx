@@ -4,7 +4,13 @@ import { authController } from "@/core/controllers/AuthController/AuthController
 import { useNavigate } from "react-router-dom"
 
 const AuthPage = () => {
-  const [form, setForm] = useState({ name: "", login: "", password: "" })
+  const [form, setForm] = useState({
+    name: "",
+    surname: "",
+    photo_url: "/images/default-user-logo.jpg",
+    login: "",
+    password: "",
+  })
   const navigate = useNavigate()
   const changeHandler = (event: any) => {
     setForm({ ...form, [event.target.name]: event.target.value })
@@ -16,8 +22,13 @@ const AuthPage = () => {
 
   const registerHandler = async () => {
     try {
-      console.log(form.login, form.password, form.name)
-      await authController.registerHandler(form.login, form.password, form.name)
+      await authController.registerHandler(
+        form.name,
+        form.login,
+        form.password,
+        form.surname,
+        form.photo_url
+      )
     } catch (e) {}
   }
 
@@ -27,10 +38,10 @@ const AuthPage = () => {
         <div className={styles.infoWrapper}>
           <div className={styles.authTitle}>Регистрация</div>
           <div className={styles.entryFieldItem}>
-            <div className={styles.title}>Логин:</div>
+            <div className={styles.title}>Имя:</div>
             <input
               className={styles.inputItem}
-              placeholder={"Введите имя"}
+              placeholder={"Введите имя (обязательное поле)"}
               id="name"
               type="login"
               name="name"
@@ -39,10 +50,34 @@ const AuthPage = () => {
           </div>
 
           <div className={styles.entryFieldItem}>
+            <div className={styles.title}>Фамилия:</div>
+            <input
+              className={styles.inputItem}
+              placeholder={"Введите фамилию"}
+              id="surname"
+              type="surname"
+              name="surname"
+              onChange={changeHandler}
+            />
+          </div>
+
+          <div className={styles.entryFieldItem}>
+            <div className={styles.title}>Фото профиля:</div>
+            <input
+              className={styles.inputItem}
+              placeholder={"Введите url"}
+              id="photo_url"
+              type="photo_url"
+              name="photo_url"
+              onChange={changeHandler}
+            />
+          </div>
+
+          <div className={styles.entryFieldItem}>
             <div className={styles.title}>Логин:</div>
             <input
               className={styles.inputItem}
-              placeholder={"Введите логин"}
+              placeholder={"Введите логин (обязательное поле)"}
               id="login"
               type="login"
               name="login"
@@ -54,7 +89,7 @@ const AuthPage = () => {
             <div className={styles.title}>Пароль:</div>
             <input
               className={styles.inputItem}
-              placeholder={"Введите пароль"}
+              placeholder={"Введите пароль (обязательное поле)"}
               id="password"
               type="login"
               name="password"

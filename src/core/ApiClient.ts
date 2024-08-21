@@ -13,6 +13,11 @@ export interface IApiClient {
     data?: any,
     config?: AxiosRequestConfig
   ): Promise<AxiosResponse<T>>
+  put<T>(
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig
+  ): Promise<AxiosResponse<T>>
   delete<T>(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse<T>>
   patch<T>(
     url: string,
@@ -20,7 +25,6 @@ export interface IApiClient {
     config?: AxiosRequestConfig
   ): Promise<AxiosResponse<T>>
 }
-
 
 export class ApiClient implements IApiClient {
   private axiosInstance: AxiosInstance
@@ -55,5 +59,13 @@ export class ApiClient implements IApiClient {
     config?: AxiosRequestConfig
   ): Promise<AxiosResponse<T>> {
     return this.axiosInstance.patch<T>(url, data, config)
+  }
+
+  put<T>(
+    url: string,
+    data?: any,
+    config?: AxiosRequestConfig
+  ): Promise<AxiosResponse<T>> {
+    return this.axiosInstance.put<T>(url, data, config)
   }
 }

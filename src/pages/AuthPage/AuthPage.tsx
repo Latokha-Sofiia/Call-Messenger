@@ -27,7 +27,6 @@ const AuthPage = () => {
       } else {
         const data = await authController.getPersonalData()
         changeName.setUserName(data.name)
-        console.log("name.userName", changeName.userName)
         auth.setIsAuthenticated(true)
       }
     } catch (e) {

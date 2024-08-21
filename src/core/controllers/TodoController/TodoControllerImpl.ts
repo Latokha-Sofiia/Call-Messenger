@@ -21,6 +21,7 @@ export class TodoControllerImpl implements TodoController {
       const response = await this.apiClient.get<{
         todos: ITodo[]
         tag: string
+        // }>("./todos.routes", {
       }>("/api/todos", {
         params: {},
       })
