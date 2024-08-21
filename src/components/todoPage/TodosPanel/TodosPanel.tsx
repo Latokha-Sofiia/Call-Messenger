@@ -27,7 +27,6 @@ const TodosPanel = observer(() => {
 
   const handleEditTodo = async (id: string, newTitle: string) => {
     await todoController.updateTodo(id, newTitle, userName)
-    console.log(userName)
   }
 
   const handleRemoveTodo = async (id: string) => {

@@ -16,8 +16,6 @@ function App() {
   useEffect(() => {
     const checkAuth = async () => {
       const response = await authController.checkAuth()
-      console.log("checkAuth", response)
-      console.log("response.data.isValid", response.data.isValid)
       setIsAuthenticated(response.data.isValid)
     }
 

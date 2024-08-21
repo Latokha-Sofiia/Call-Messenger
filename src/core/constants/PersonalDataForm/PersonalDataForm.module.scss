@@ -1,0 +1,109 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  user-select: none;
+}
+
+.formContainer {
+  margin: 100px 0;
+  width: 50%;
+  background-color: var(--light-blue);
+  padding: 30px;
+  z-index: 1001;
+  border-radius: 10px;
+}
+
+.entryFieldItem {
+  margin-bottom: 10px;
+}
+
+.inputItem {
+  background-color: var(--transparent-blue);
+  border-radius: 6px;
+  width: 100%;
+  height: 30px;
+  border-color: transparent;
+  border-width: 1px;
+  padding: 5px 10px;
+  color: var(--gray-text);
+  outline: 0;
+  outline-offset: 0;
+}
+
+.inputError {
+  border: solid #d218b1 1px;
+}
+
+.title {
+  color: var(--gray-text);
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.buttonSave {
+  background-color: var(--button-blue);
+  color: var(--navy-blue);
+  font-size: 14px;
+  width: 40%;
+  min-width: 190px;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  font-weight: 700;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--rainbow-background);
+    background-size: 400%;
+    animation: glowing 20s linear infinite;
+    transition: opacity 0.3s ease-in-out;
+
+    color: var(--navy-blue);
+    font-weight: 700;
+  }
+}
+
+.buttonCancel {
+  min-width: 190px;
+  background-color: var(--button-blue);
+  font-size: 14px;
+  color: var(--navy-blue);
+  width: 40%;
+  margin-right: 20%;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 15px;
+  height: max-content;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--red-randow-background);
+    background-size: 400%;
+    animation: glowing 20s linear infinite;
+    transition: opacity 0.3s ease-in-out;
+
+    color: var(--navy-blue);
+  }
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
