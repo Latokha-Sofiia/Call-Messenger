@@ -2,9 +2,8 @@ import { makeAutoObservable } from "mobx"
 import { notificationController } from "../../controllers/NotificationController/NotificationController"
 import { ITodo } from "@/core/models"
 import { INotificationType } from "@/core/constants/Notifications/NotificationsTypes"
-import { UserContext } from "@/core/context/UserContext"
-import { AuthContext } from "@/core/context/AuthContext"
-import { useContext } from "react"
+import { io, Socket } from "socket.io-client"
+
 export interface TodosStore {
   todos: ITodo[]
   addTodos(todos: ITodo[]): void
@@ -18,9 +17,35 @@ export interface TodosStore {
 
 export class TodosStoreImpl implements TodosStore {
   todos: ITodo[] = []
+  private socket: Socket
 
   constructor() {
     makeAutoObservable(this)
+
+    this.socket = io("http://localhost:5000", {
+      transports: ["websocket"],
+      withCredentials: true,
+    })
+
+    this.socket.on("user-connected", (userId: string) => {
+      this.socket.emit("join", userId)
+    })
+
+    this.socket.on("todo-created", (newTodo: ITodo) => {
+      this.addTodos([newTodo])
+    })
+
+    this.socket.on("todo-deleted", (deletedTodo: ITodo) => {
+      this.removeTodo(deletedTodo._id)
+    })
+
+    this.socket.on("todo-completed", (todo: ITodo) => {
+      this.completeTodo(todo._id)
+    })
+
+    this.socket.on("edit-todo", (updatedTodo: ITodo) => {
+      this.editTodo(updatedTodo._id, updatedTodo.title, "Name")
+    })
   }
 
   addTodos(todos: ITodo[]) {

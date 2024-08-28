@@ -5,8 +5,6 @@ import {
   todosStore as defaultTodosStore,
 } from "../../store/TodoStore/TodoStore"
 import { ITodo, ITodoWithName } from "@/core/models"
-import { UserContext } from "@/core/context/UserContext"
-import { useContext } from "react"
 
 export class TodoControllerImpl implements TodoController {
   private nextTag: string | undefined = undefined
