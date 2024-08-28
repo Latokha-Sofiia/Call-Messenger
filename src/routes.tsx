@@ -21,7 +21,7 @@ export const useRoutes = (isAuthenticated: boolean | null) => {
 
         <Route path="/conferences" element={<ConferencesPage />} />
 
-        <Route path="/personal_data" element={<PersonalDataPage />} />
+        <Route path="/personal-data" element={<PersonalDataPage />} />
 
         <Route path="*" element={<PersonalDataPage />} />
       </Routes>

@@ -4,9 +4,9 @@ import { ITodo } from "@/core/models"
 
 interface ITodoProps {
   todo: ITodo
-  onRemove: (id: string) => void
-  onComplete: (id: string) => void
-  onEdit: (id: string, newTitle: string) => void
+  onRemove: (_id: string) => void
+  onComplete: (_id: string) => void
+  onEdit: (_id: string, newTitle: string) => void
 }
 
 const NotCompletedTodo: React.FC<ITodoProps> = ({
@@ -26,7 +26,7 @@ const NotCompletedTodo: React.FC<ITodoProps> = ({
     }
 
     if (isEditing) {
-      onEdit(todo.id, inputValue)
+      onEdit(todo._id, inputValue)
     }
   }
 
@@ -35,10 +35,10 @@ const NotCompletedTodo: React.FC<ITodoProps> = ({
   }
 
   return (
-    <div key={todo.id} className={styles.mainContent}>
+    <div key={todo._id} className={styles.mainContent}>
       <button
         className={styles.buttonRemoveTodo}
-        onClick={() => onRemove(todo.id)}
+        onClick={() => onRemove(todo._id)}
       >
         Delete
       </button>
@@ -52,7 +52,7 @@ const NotCompletedTodo: React.FC<ITodoProps> = ({
 
       <button
         className={styles.checkboxComplete}
-        onClick={() => onComplete(todo.id)}
+        onClick={() => onComplete(todo._id)}
       />
 
       {isEditing ? (

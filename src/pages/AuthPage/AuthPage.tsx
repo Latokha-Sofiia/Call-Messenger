@@ -22,13 +22,16 @@ const AuthPage = () => {
         form.password
       )
 
-      if (response === false) {
+      console.log(response)
+
+      if (response.isSuccess === false) {
         auth.setIsAuthenticated(false)
       } else {
         const data = await authController.getPersonalData()
         changeName.setUserName(data.name)
         auth.setIsAuthenticated(true)
       }
+      navigate("/personal-data")
     } catch (e) {
       auth.setIsAuthenticated(false)
     }

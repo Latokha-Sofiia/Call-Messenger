@@ -21,7 +21,9 @@ const PersonalDataForm: React.FC<PersonalDataFormProps> = ({
   const [surname, setSurname] = useState<string>(initialData.surname || "")
   const [login, setLogin] = useState<string>(initialData.login || "")
   const [password, setPassword] = useState<string>(initialData.password || "")
-  const [photo_url, setPhotoUrl] = useState<string>(initialData.photo_url || "")
+  const [photo_url, setPhotoUrl] = useState<string>(
+    initialData.photo_url || "/images/default-user-logo.jpg"
+  )
 
   const isFormValid = () => {
     return name.trim() && login.trim() && password.trim()
@@ -34,7 +36,7 @@ const PersonalDataForm: React.FC<PersonalDataFormProps> = ({
       surname,
       login,
       password,
-      photo_url: "/images/default-user-logo.jpg",
+      photo_url,
     })
   }
 

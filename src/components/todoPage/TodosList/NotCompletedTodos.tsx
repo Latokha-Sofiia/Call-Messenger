@@ -7,9 +7,9 @@ import any = jasmine.any
 
 interface ITodoListProps {
   todos: ITodo[]
-  onRemove: (id: string) => void
-  onComplete: (id: string) => void
-  onEdit: (id: string, newTitle: string) => void
+  onRemove: (_id: string) => void
+  onComplete: (_id: string) => void
+  onEdit: (_id: string, newTitle: string) => void
 }
 
 const NotCompletedTodos: React.FC<ITodoListProps> = ({
