@@ -7,6 +7,7 @@ const { Server } = require("socket.io")
 const mongoose = require("mongoose")
 const setupWebSocketServer = require("./routes/wsRoutes")
 const MongoStore = require("connect-mongo")
+const sharedSession = require("express-socket.io-session")
 
 const app = express()
 
@@ -22,24 +23,24 @@ app.use(cors(corsOptions))
 app.use(express.json({ extended: true }))
 app.use(express.urlencoded({ extended: true }))
 
-app.use(
-  session({
-    secret: "your-secret-key",
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({
-      mongoUrl:
-        "mongodb+srv://sofiianeroda:Qwerty123@cluster0.u56fu.mongodb.net/call-messenger?retryWrites=true&w=majority&appName=Cluster0",
-      ttl: 14 * 24 * 60 * 60,
-    }),
-    cookie: {
-      maxAge: 1000 * 60 * 60 * 24 * 14,
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-    },
-  })
-)
+const sessionMiddleware = session({
+  secret: "your-secret-key",
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl:
+      "mongodb+srv://sofiianeroda:Qwerty123@cluster0.u56fu.mongodb.net/call-messenger?retryWrites=true&w=majority&appName=Cluster0",
+    ttl: 14 * 24 * 60 * 60,
+  }),
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 14,
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+  },
+})
+
+app.use(sessionMiddleware)
 
 app.use("/api/auth", require("./routes/auth.routes"))
 app.use("/api/todos", require("./routes/todos.routes"))
@@ -59,10 +60,16 @@ async function start() {
   const server = http.createServer(app)
   const io = new Server(server, {
     cors: {
-      origin: "*",
+      origin: "http://localhost:3000",
       credentials: true,
     },
   })
+
+  io.use(
+    sharedSession(sessionMiddleware, {
+      autoSave: true,
+    })
+  )
 
   const setupWebSocketServer = require("./routes/wsRoutes")
   setupWebSocketServer(io)

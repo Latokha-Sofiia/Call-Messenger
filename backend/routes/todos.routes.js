@@ -53,7 +53,8 @@ router.post("/create", async (req, res) => {
 
   const io = req.app.get("io")
 
-  io.to(req.session.userId).emit("todo-updated", newTodo)
+  io.to(req.session.userId).emit("todo-created", newTodo)
+  console.log("todo-updated")
 
   res.json([newTodo])
 })
@@ -94,7 +95,7 @@ router.patch("/", async (req, res) => {
   await todo.save()
 
   const io = req.app.get("io")
-  io.to(req.session.userId).emit("todo-updated", todo)
+  io.to(req.session.userId).emit("todo-completed", todo)
   res.json(todo)
 })
 

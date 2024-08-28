@@ -124,6 +124,7 @@ router.post(
 router.get("/check-auth", (req, res) => {
   if (req.session.userId) {
     console.log("/check-auth true", req.session.userId)
+
     return res.status(200).json({ isValid: true })
   } else {
     console.log("/check-auth false", req.session.userId)
@@ -144,11 +145,11 @@ router.post(
         return res.status(400).json({ message: "Неправельные данные" })
       }
 
-      req.session.userId = user._id
-      user.sessions.push(req.session.id)
-      await user.save()
-
       console.log("login")
+
+      const io = req.app.get("io")
+      console.log("join", user._id)
+      io.emit("join", user._id)
 
       return res.status(200).json({ isSuccess: true })
     } catch (e) {
