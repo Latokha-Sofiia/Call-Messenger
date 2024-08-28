@@ -1,9 +1,8 @@
 export type TodoId = string
 
 export interface ITodo {
-  id: TodoId
+  _id: string
   title: string
-  // description: string
   completed: boolean
 }
 
@@ -12,8 +11,7 @@ export interface ITodoWithName extends ITodo {
 }
 
 export interface IAuthResponseLogin {
-  token: string
-  userId: string
+  isSuccess: boolean
 }
 
 export interface IUserData {
@@ -37,6 +35,14 @@ export interface IUserDataProps {
 
 export interface ICheckAuthResponse {
   isValid: boolean
+}
+
+export interface IGetPersonalDataResponse {
+  name: string
+  login: string
+  password: string
+  surname: string
+  photo_url: string
 }
 
 export interface IAuthResponseRegister {

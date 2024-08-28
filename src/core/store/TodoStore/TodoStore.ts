@@ -24,9 +24,12 @@ export class TodosStoreImpl implements TodosStore {
   }
 
   addTodos(todos: ITodo[]) {
-    const existingIds = this.todos.map((todo) => todo.id)
-    const newTodos = todos.filter((todo) => !existingIds.includes(todo.id))
+    const existingIds = this.todos.map((todo) => todo._id)
+    console.log("existingIds", existingIds)
+
+    const newTodos = todos.filter((todo) => !existingIds.includes(todo._id))
     this.todos = [...newTodos, ...this.todos]
+    console.log("this.todos", this.todos)
     notificationController.showNotification(
       "Добавлено новое TODO:",
       INotificationType.Added,
@@ -36,13 +39,18 @@ export class TodosStoreImpl implements TodosStore {
   }
 
   loadMoreTodos(todos: ITodo[]) {
-    const existingIds = this.todos.map((todo) => todo.id)
-    const newTodos = todos.filter((todo) => !existingIds.includes(todo.id))
+    const existingIds = this.todos.map((todo) => todo._id)
+    const newTodos = todos.filter((todo) => !existingIds.includes(todo._id))
     this.todos = [...this.todos, ...newTodos]
   }
 
   updateTodo(updatedTodo: ITodo) {
-    const todoIndex = this.todos.findIndex((todo) => todo.id === updatedTodo.id)
+    const todoIndex = this.todos.findIndex(
+      (todo) => todo._id === updatedTodo._id
+    )
+    console.log("updatedTodo", updatedTodo)
+    console.log("todoIndex", todoIndex)
+
     if (todoIndex !== -1) {
       this.todos[todoIndex] = updatedTodo
     } else if (updatedTodo.title.trim() !== "") {
@@ -50,12 +58,12 @@ export class TodosStoreImpl implements TodosStore {
     }
 
     this.todos = this.todos.map((todo) =>
-      todo.id === updatedTodo.id ? updatedTodo : todo
+      todo._id === updatedTodo._id ? updatedTodo : todo
     )
   }
 
   removeTodo(id: string) {
-    this.todos = this.todos.filter((todo) => todo.id !== id)
+    this.todos = this.todos.filter((todo) => todo._id !== id)
     notificationController.showNotification(
       "Todo нас покинуло...",
       INotificationType.Removed,
@@ -66,10 +74,10 @@ export class TodosStoreImpl implements TodosStore {
 
   completeTodo(id: string) {
     this.todos = this.todos.map((todo) =>
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      todo._id === id ? { ...todo, completed: !todo.completed } : todo
     )
 
-    const todoItem = this.todos.find((todo) => todo.id === id)
+    const todoItem = this.todos.find((todo) => todo._id === id)
 
     if (todoItem.completed) {
       notificationController.showNotification(
@@ -90,10 +98,10 @@ export class TodosStoreImpl implements TodosStore {
 
   editTodo(id: string, newTitle: string, name: string) {
     this.todos = this.todos.map((todo) =>
-      todo.id === id ? { ...todo, title: newTitle } : todo
+      todo._id === id ? { ...todo, title: newTitle } : todo
     )
 
-    const todoItem = this.todos.find((todo) => todo.id === id)
+    const todoItem = this.todos.find((todo) => todo._id === id)
     notificationController.showNotification(
       "Todo изменено",
       INotificationType.Edited,

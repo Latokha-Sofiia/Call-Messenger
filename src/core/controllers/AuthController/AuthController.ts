@@ -3,6 +3,7 @@ import {
   IAuthResponseLogin,
   IAuthResponseRegister,
   ICheckAuthResponse,
+  IGetPersonalDataResponse,
 } from "@/core/models"
 import * as M from "materialize-css"
 import { TodoControllerImpl } from "@/core/controllers/TodoController/TodoControllerImpl"
@@ -21,18 +22,14 @@ class AuthController {
   }
 
   async getPersonalData() {
-    const response = await this.apiClient.get<{
-      name: string
-      login: string
-      password: string
-      surname: string
-      photo_url: string
-    }>("/api/auth/personal-data", {
-      withCredentials: true,
-    })
+    const response = await this.apiClient.get<IGetPersonalDataResponse>(
+      "/api/auth/personal-data",
+      {
+        withCredentials: true,
+      }
+    )
 
     return response.data
-    return
   }
 
   async updatePersonalData(data: {
@@ -76,7 +73,7 @@ class AuthController {
   async loginHandler(
     login: string,
     password: string
-  ): Promise<IAuthResponseLogin | false> {
+  ): Promise<IAuthResponseLogin> {
     try {
       const response = await this.apiClient.post<IAuthResponseLogin>(
         "/api/auth/login",
@@ -87,7 +84,7 @@ class AuthController {
       return response.data
     } catch (e) {
       this.showNotification(e.response.data.message)
-      return false
+      return { isSuccess: false }
     }
   }
 

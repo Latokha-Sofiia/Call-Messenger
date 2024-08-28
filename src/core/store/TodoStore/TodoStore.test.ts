@@ -3,8 +3,8 @@ import { ITodo } from "@/core/models"
 
 function createTodos(): ITodo[] {
   return [
-    { id: "1", title: "TodoStore 1", completed: true },
-    { id: "2", title: "TodoStore 2", completed: false },
+    { _id: "1", title: "TodoStore 1", completed: true },
+    { _id: "2", title: "TodoStore 2", completed: false },
   ]
 }
 
@@ -32,19 +32,19 @@ describe("TodoStore", () => {
 
     it("should update the existing todo", () => {
       const updatedTodo: ITodo = {
-        id: "1",
+        _id: "1",
         title: "updateTodo",
         completed: false,
       }
       todosStore.updateTodo(updatedTodo)
       expect(todosStore.todos).toEqual(
-        createTodos().map((todo) => (todo.id === "1" ? updatedTodo : todo))
+        createTodos().map((todo) => (todo._id === "1" ? updatedTodo : todo))
       )
     })
 
     it("should add a new todo if the given id doesn't exist", () => {
       const updatedTodo: ITodo = {
-        id: "3",
+        _id: "3",
         title: "updateTodo",
         completed: false,
       }
@@ -67,7 +67,7 @@ describe("TodoStore", () => {
     it("should remove todo with the given id", () => {
       todosStore.removeTodo("1")
       expect(todosStore.todos).toEqual(
-        createTodos().filter((todo) => todo.id !== "1")
+        createTodos().filter((todo) => todo._id !== "1")
       )
     })
 

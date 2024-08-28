@@ -23,9 +23,13 @@ export class TodoControllerImpl implements TodoController {
         tag: string
         // }>("./todos.routes", {
       }>("/api/todos", {
+        withCredentials: true,
         params: {},
       })
-      response.data.todos.forEach((todo) => this.todosStore.updateTodo(todo))
+      const newTodos: ITodo[] = response.data.todos
+      this.todosStore.loadMoreTodos(newTodos)
+
+      // response.data.todos.forEach((todo) => this.todosStore.updateTodo(todo))
       this.nextTag = response.data.tag
     } catch (error) {
       console.error("Error fetching todos:", error)
@@ -38,6 +42,7 @@ export class TodoControllerImpl implements TodoController {
         todos: ITodo[]
         tag: string
       }>("/api/todos", {
+        withCredentials: true,
         params: { pageSize, tag: this.nextTag },
       })
       this.todosStore.loadMoreTodos(response.data.todos)
@@ -54,7 +59,8 @@ export class TodoControllerImpl implements TodoController {
           "/api/todos/create",
           {
             title,
-          }
+          },
+          { withCredentials: true }
         )
         const newTodos: ITodo[] = response.data
         this.todosStore.addTodos(newTodos)
@@ -64,31 +70,39 @@ export class TodoControllerImpl implements TodoController {
     }
   }
 
-  async removeTodo(id: string) {
+  async removeTodo(_id: string) {
     try {
-      await this.apiClient.delete(`/api/todos?id=${id}`)
-      this.todosStore.removeTodo(id)
+      await this.apiClient.delete(`/api/todos?id=${_id}`, {
+        withCredentials: true,
+      })
+      this.todosStore.removeTodo(_id)
     } catch (error) {
       console.error("Error removing todo:", error)
     }
   }
 
-  async completeTodo(id: string) {
+  async completeTodo(_id: string) {
     try {
-      await this.apiClient.patch(`/api/todos?id=${id}`)
-      this.todosStore.completeTodo(id)
+      await this.apiClient.patch(
+        `/api/todos?id=${_id}`,
+        {},
+        { withCredentials: true }
+      )
+      this.todosStore.completeTodo(_id)
     } catch (error) {
       console.error("Error completing todo:", error)
     }
   }
 
-  async updateTodo(id: string, newTitle: string, name: string) {
+  async updateTodo(_id: string, newTitle: string, name: string) {
     try {
       if (newTitle.trim() !== "") {
         await this.apiClient.patch<ITodo>(
-          `/api/todos/edit?id=${id}&title=${newTitle}&name=${name}`
+          `/api/todos/edit?id=${_id}`,
+          { title: newTitle },
+          { withCredentials: true }
         )
-        this.todosStore.editTodo(id, newTitle, name)
+        this.todosStore.editTodo(_id, newTitle, name)
       }
     } catch (error) {
       console.error("Error adding todo:", error)
@@ -96,7 +110,7 @@ export class TodoControllerImpl implements TodoController {
   }
 
   updateTodoInStore(newTodo: ITodoWithName): void {
-    this.todosStore.editTodo(newTodo.id, newTodo.title, newTodo.name)
+    this.todosStore.editTodo(newTodo._id, newTodo.title, newTodo.name)
   }
 }
 
