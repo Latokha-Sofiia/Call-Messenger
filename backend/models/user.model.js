@@ -1,4 +1,4 @@
-// const mongoose = require("mongoose")
+const mongoose = require("mongoose")
 
 const UserSchema = new mongoose.Schema({
   login: { type: String, required: true, unique: true },
@@ -9,4 +9,4 @@ const UserSchema = new mongoose.Schema({
   sessions: [{ type: String }],
 })
 
-module.exports = mongoose.model("users", UserSchema)
+// module.exports = mongoose.model("users", UserSchema)
