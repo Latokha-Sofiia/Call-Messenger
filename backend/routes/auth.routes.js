@@ -1,7 +1,7 @@
 const express = require("express")
 const jwt = require("jsonwebtoken")
 const { check, validationResult } = require("express-validator")
-// const User = require("../models/user.model")
+const User = require("../models/user.model")
 
 const JWT_SECRET = "jwt-secret"
 const USER_COLLECTION_NAME = "users"
